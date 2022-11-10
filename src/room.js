@@ -1,4 +1,6 @@
-export class Room {
+const GameInfo = require('./gameinfo');
+
+class Room {
     constructor() {
         this.players = [];
         this.headCount = 0;
@@ -40,3 +42,5 @@ export class Room {
         this.isVaild = false;
     }
 }
+
+module.exports = Room;

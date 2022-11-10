@@ -25,10 +25,12 @@ const SHAPE = {
 Object.freeze(VALUE);
 Object.freeze(SHAPE);
 
-export class Card {
+class Card {
     constructor(id, value, shape) {
         this.id = id;
         this.value = VALUE[value];
         this.shape = SHAPE[shape];
     }
 }
+
+module.exports = Card;

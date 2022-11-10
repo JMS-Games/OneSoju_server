@@ -1,4 +1,6 @@
-export class Deque {
+const Card = require('./card');
+
+class Deque {
     constructor() {
         this.queue = [];
         this.init();
@@ -32,3 +34,5 @@ export class Deque {
         this.size += 1;
     }
 }
+
+module.exports = Deque;

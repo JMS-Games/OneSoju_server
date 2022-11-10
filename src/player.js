@@ -1,4 +1,4 @@
-export class Player {
+class Player {
     constructor(id, uuid) {
         this.id = id;
         this.uuid = uuid;
@@ -15,3 +15,5 @@ export class Player {
         return this.room;
     }
 }
+
+module.exports = Player;

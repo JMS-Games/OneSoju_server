@@ -9,7 +9,7 @@ const STATE = {
 
 Object.freeze(STATE);
 
-export class GameInfo {
+class GameInfo {
     constructor(players) {
         this.headCount = players.length;
         this.hands = {};
@@ -36,3 +36,5 @@ export class GameInfo {
         return this;
     }
 }
+
+module.exports = GameInfo;

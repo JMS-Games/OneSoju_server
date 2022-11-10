@@ -1,4 +1,5 @@
 const CODE = require("./code");
+const Room = require('./room');
 
 const GameManager = (function() {
     let instance;
