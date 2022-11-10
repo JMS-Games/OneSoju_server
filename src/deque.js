@@ -1,13 +1,22 @@
 class Deque {
     constructor() {
         this.queue = [];
-        this.size = 54;
+        this.init();
+        this.size = this.queue.length;
+    }
+
+    init() {
         for(let i=0;i < 52;i++) {
             this.queue.append(new Card(i, i % 14, (i / 14).toFixed()))
         }
         // append JOKER
         this.queue.append(new Card(52, 14, 0));
         this.queue.append(new Card(53, 14, 1));
+    }
+
+    makeEmpty() {
+        this.queue = [];
+        this.size = 0;
     }
 
     getSize() {
