@@ -16,19 +16,23 @@ const GameManager = (function() {
             },
 
             addPlayer: function(player, res) {
-                const ok = this.curRoom ? this.curRoom.addPlayer(player) : false;
-                ok || this.createRoom() && this.curRoom.addPlayer(player);
+                const isRoom = this.curRoom ? this.curRoom.addPlayer(player) : false;
+                isRoom || this.createRoom() && this.curRoom.addPlayer(player);
+                player.setRoom(this.curRoom, !isRoom);
+
                 res({
                     CODE: CODE.OK,
-                    room: this.curRoom
+                    room: player.getRoom()
                 });
             },
 
-            startGame: function(res) {
-                this.curRoom.startGame();
+            startGame: function(player, res) {
+                const room = player.isAdmin ? player.getRoom() : null;
+                const code = room ? CODE.OK : CODE.ERROR;
+                room && room.startGame();
                 res({
-                    CODE: CODE.OK
-                })
+                    CODE: code
+                });
             },
 
             curRoom: null,
