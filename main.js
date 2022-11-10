@@ -3,7 +3,6 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 const SIG = require('src/signal');
-const CODE = require('src/code');
 const GM = require('src/gamemanager').getInstance();
 
 server.listen(3000, () => {
