@@ -40,7 +40,7 @@ io.on('connection', (socket) => {
     socket.on(SIG.EXIT_ROOM, (req, res) => {
         const msg = {msg: `player ${curPlayer.uuid} left the room.`};
         for (const player in curPlayer.getRoom().players) {
-            io.to(player.id).emit(SIG.JOIN_ROOM, msg);
+            io.to(player.id).emit(SIG.EXIT_ROOM, msg);
         }
     });
 
