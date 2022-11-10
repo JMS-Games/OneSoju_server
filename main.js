@@ -15,7 +15,7 @@ io.on('connection', (socket) => {
        console.log(`client disconnected from client id: ${socket.id}`);
     });
 
-    socket.on(SIG.JOIN_ROOM, () => {
-
+    socket.on(SIG.JOIN_ROOM, (req, res) => {
+        
     });
 });
