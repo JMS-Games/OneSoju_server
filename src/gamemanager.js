@@ -4,12 +4,18 @@ const GameManager = (function() {
     function init() {
         return {
             createRoom: function() {
-                if (this.curRoom && this.curRoom.isValid()) {
-                    return;
+                if (this.curRoom && this.curRoom.getIsValid()) {
+                    return false;
                 }
                 const tmpRoom = new Room();
                 this.rooms.append(tmpRoom);
                 this.curRoom = tmpRoom;
+                return true;
+            },
+
+            addPlayer: function(player) {
+                const ok = this.curRoom.addPlayer(player);
+                ok || this.createRoom() && this.curRoom.addPlayer(player);
             },
 
             curRoom: null,

@@ -1,14 +1,23 @@
 class Room {
     constructor() {
         this.players = [];
-        this.isInGame = false;
+        this.isVaild = true;
     }
 
     addPlayer(player) {
-        this.players.append(player);
+        if (this.players.length < 4) {
+            this.players.append(player);
+            return true;
+        }
+        this.isVaild = false;
+        return false;
     }
 
-    isValid() {
-        return !this.isInGame;
+    getIsValid() {
+        return this.isVaild;
+    }
+
+    startGame() {
+        this.isVaild = false;
     }
 }
