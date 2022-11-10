@@ -2,6 +2,7 @@ class Room {
     constructor() {
         this.players = [];
         this.isVaild = true;
+        this.gameinfo = null;
     }
 
     addPlayer(player) {
@@ -17,7 +18,12 @@ class Room {
         return this.isVaild;
     }
 
+    getGameInfo() {
+        return this.gameinfo;
+    }
+
     startGame() {
+        this.gameinfo = new GameInfo(this.players);
         this.isVaild = false;
     }
 }

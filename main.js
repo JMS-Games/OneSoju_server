@@ -22,4 +22,12 @@ io.on('connection', (socket) => {
         curUser = req.uid;
         GM.addPlayer(curUser, res);
     });
+
+    socket.on(SIG.JOIN_ROOM, (req, res) => {
+
+    });
+
+    socket.on(SIG.START_GAME, (req, res) => {
+        GM.startGame(res);
+    });
 });

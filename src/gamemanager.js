@@ -24,6 +24,13 @@ const GameManager = (function() {
                 });
             },
 
+            startGame: function(res) {
+                this.curRoom.startGame();
+                res({
+                    CODE: CODE.OK
+                })
+            },
+
             curRoom: null,
             rooms: [],
         }
