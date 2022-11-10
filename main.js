@@ -2,8 +2,8 @@ const app = require('express')();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
-const SIG = require('src/signal');
-const GM = require('src/gamemanager').getInstance();
+const SIG = require('./src/signal');
+const GM = require('./src/gamemanager').getInstance();
 
 server.listen(3000, () => {
     console.log("server is listening on 3000");
