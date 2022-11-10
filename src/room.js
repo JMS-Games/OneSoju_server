@@ -11,7 +11,7 @@ class Room {
     addPlayer(player) {
         if (this.headCount < 4) {
             this.headCount += 1;
-            this.players.append(player);
+            this.players.push(player);
             return true;
         }
         this.isVaild = false;

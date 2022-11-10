@@ -9,11 +9,11 @@ class Deque {
 
     init() {
         for(let i=0;i < 52;i++) {
-            this.queue.append(new Card(i, i % 14, (i / 14).toFixed()))
+            this.queue.push(new Card(i, i % 14, (i / 14).toFixed()))
         }
-        // append JOKER
-        this.queue.append(new Card(52, 14, 0));
-        this.queue.append(new Card(53, 14, 1));
+        // push JOKER
+        this.queue.push(new Card(52, 14, 0));
+        this.queue.push(new Card(53, 14, 1));
     }
 
     makeEmpty() {
@@ -30,7 +30,7 @@ class Deque {
     }
 
     add(card) {
-        this.queue.append(card);
+        this.queue.push(card);
         this.size += 1;
     }
 }

@@ -11,7 +11,7 @@ const GameManager = (function() {
                     return false;
                 }
                 const tmpRoom = new Room();
-                this.rooms.append(tmpRoom);
+                this.rooms.push(tmpRoom);
                 this.curRoom = tmpRoom;
                 return true;
             },
