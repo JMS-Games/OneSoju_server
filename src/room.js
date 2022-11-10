@@ -1,4 +1,4 @@
-class Room {
+export class Room {
     constructor() {
         this.players = [];
         this.headCount = 0;

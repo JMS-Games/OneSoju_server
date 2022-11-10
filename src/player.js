@@ -1,4 +1,4 @@
-class Player {
+export class Player {
     constructor(id, uuid) {
         this.id = id;
         this.uuid = uuid;

@@ -25,7 +25,7 @@ const SHAPE = {
 Object.freeze(VALUE);
 Object.freeze(SHAPE);
 
-class Card {
+export class Card {
     constructor(id, value, shape) {
         this.id = id;
         this.value = VALUE[value];

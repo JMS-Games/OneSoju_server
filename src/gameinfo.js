@@ -9,7 +9,7 @@ const STATE = {
 
 Object.freeze(STATE);
 
-class GameInfo {
+export class GameInfo {
     constructor(players) {
         this.headCount = players.length;
         this.hands = {};
