@@ -4,8 +4,7 @@ const io = require('socket.io')(server);
 
 const SIG = require('src/signal');
 const CODE = require('src/code');
-const GameManager = require('src/gamemanager');
-const GM = GameManager.getInstance();
+const GM = require('src/gamemanager').getInstance();
 
 server.listen(3000, () => {
     console.log("server is listening on 3000");
