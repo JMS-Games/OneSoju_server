@@ -11,7 +11,7 @@ Object.freeze(STATE);
 
 class GameInfo {
     constructor(players) {
-        this.headcount = players.length;
+        this.headCount = players.length;
         this.hands = {};
         this.initHands(players);
 

@@ -1,12 +1,14 @@
 class Room {
     constructor() {
         this.players = [];
+        this.headCount = 0;
         this.isVaild = true;
         this.gameInfo = null;
     }
 
     addPlayer(player) {
-        if (this.players.length < 4) {
+        if (this.headCount < 4) {
+            this.headCount += 1;
             this.players.append(player);
             return true;
         }
@@ -17,7 +19,8 @@ class Room {
     removePlayer(target_player) {
         for(let i = 0; i < this.players.length; i++) {
             if (this.players[i].uuid === target_player.uuid) {
-                this.gameInfo.headcount -= 1;
+                this.gameInfo.headCount -= 1;
+                this.headCount -= 1;
                 this.players[i] = null;
                 return;
             }
