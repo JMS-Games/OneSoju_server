@@ -1,3 +1,14 @@
+const STATE = {
+    BEFORE_START: 0,
+    PREPARING: 1,
+    TURN_START: 2,
+    PLAYING: 3,
+    TURN_END: 4,
+    GAME_FINISHED: 5,
+};
+
+Object.freeze(STATE);
+
 class GameInfo {
     constructor(players) {
         this.headcount = players.length;
@@ -5,6 +16,7 @@ class GameInfo {
 
         this.curTurn = 0;
         this.curCard = null;
+        this.state = STATE.BEFORE_START;
 
         this.sideDeque = new Deque();
         this.sideDeque.makeEmpty();

@@ -1,5 +1,6 @@
 class Player {
-    constructor(uuid) {
+    constructor(id, uuid) {
+        this.id = id;
         this.uuid = uuid;
         this.room = null;
         this.isAdmin = false;
