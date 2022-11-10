@@ -2,7 +2,7 @@ class Room {
     constructor() {
         this.players = [];
         this.isVaild = true;
-        this.gameinfo = null;
+        this.gameInfo = null;
     }
 
     addPlayer(player) {
@@ -14,16 +14,26 @@ class Room {
         return false;
     }
 
+    removePlayer(target_player) {
+        for(let i = 0; i < this.players.length; i++) {
+            if (this.players[i].uuid === target_player.uuid) {
+                this.gameInfo.headcount -= 1;
+                this.players[i] = null;
+                return;
+            }
+        }
+    }
+
     getIsValid() {
         return this.isVaild;
     }
 
     getGameInfo() {
-        return this.gameinfo;
+        return this.gameInfo.getInstance();
     }
 
     startGame() {
-        this.gameinfo = new GameInfo(this.players);
+        this.gameInfo = new GameInfo(this.players);
         this.isVaild = false;
     }
 }

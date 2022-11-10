@@ -26,4 +26,9 @@ class Deque {
     shuffle() {
         this.queue.sort(() => Math.random() - 0.5);
     }
+
+    add(card) {
+        this.queue.append(card);
+        this.size += 1;
+    }
 }

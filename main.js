@@ -13,11 +13,12 @@ io.on('connection', (socket) => {
     let curPlayer = null;
 
     socket.on('disconnect', () => {
-       console.log(`client disconnected from socket id: ${socket.id}, player uuid: ${curPlayer.uuid}`);
-       if (!curPlayer) {
+        console.log(`client disconnected from socket id: ${socket.id}, player uuid: ${curPlayer.uuid}`);
+        if (!curPlayer) {
            return;
-       }
+        }
 
+        GM.removePlayer(curPlayer);
     });
 
     socket.on(SIG.REQUEST_MATCH, (req, res) => {

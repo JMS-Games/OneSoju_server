@@ -12,7 +12,8 @@ Object.freeze(STATE);
 class GameInfo {
     constructor(players) {
         this.headcount = players.length;
-        this.hands = [];
+        this.hands = {};
+        this.initHands(players);
 
         this.curTurn = 0;
         this.curCard = null;
@@ -23,5 +24,15 @@ class GameInfo {
 
         this.deque = new Deque();
         this.deque.shuffle();
+    }
+
+    initHands(players) {
+        for (const player in players) {
+            this.hands[player.uuid] = [];
+        }
+    }
+
+    getInstance() {
+        return this;
     }
 }
