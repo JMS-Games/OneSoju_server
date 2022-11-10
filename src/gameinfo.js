@@ -1,3 +1,5 @@
+const Deque = require('./deque');
+
 const STATE = {
     BEFORE_START: 0,
     PREPARING: 1,
