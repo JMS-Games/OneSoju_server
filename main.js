@@ -4,6 +4,7 @@ const io = require('socket.io')(server);
 
 const SIG = require('src/signal');
 const CODE = require('src/code');
+const GameManager = require('src/gamemanager');
 const GM = GameManager.getInstance();
 
 server.listen(3000, () => {
@@ -20,11 +21,6 @@ io.on('connection', (socket) => {
 
     socket.on(SIG.REQUEST_MATCH, (req, res) => {
         curUser = req.uid;
-        GM.createRoom();
-        GM.addPlayer(curUser);
-        res({
-            CODE: CODE.OK,
-            room: GM.curRoom
-        })
+        GM.addPlayer(curUser, res);
     });
 });

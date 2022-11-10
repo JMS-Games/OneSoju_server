@@ -1,3 +1,5 @@
+const CODE = require("./code");
+
 const GameManager = (function() {
     let instance;
 
@@ -13,9 +15,13 @@ const GameManager = (function() {
                 return true;
             },
 
-            addPlayer: function(player) {
-                const ok = this.curRoom.addPlayer(player);
+            addPlayer: function(player, res) {
+                const ok = this.curRoom ? this.curRoom.addPlayer(player) : false;
                 ok || this.createRoom() && this.curRoom.addPlayer(player);
+                res({
+                    CODE: CODE.OK,
+                    room: this.curRoom
+                });
             },
 
             curRoom: null,
@@ -33,3 +39,5 @@ const GameManager = (function() {
         }
     }
 })();
+
+module.exports = GameManager;
