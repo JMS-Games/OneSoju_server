@@ -44,6 +44,7 @@ class Room {
     startGame() {
         this.gameInfo = new GameInfo(this.players);
         this.isVaild = false;
+        this.gameInfo.gamePrepareSeq();
     }
 }
 
