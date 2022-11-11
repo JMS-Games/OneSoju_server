@@ -30,6 +30,7 @@ class GameInfo {
     gamePrepareSeq() {
         this.state = STATE.PREPARING;
         this.curCard = this.deque.draw();
+        this.sideDeque.add(this.curCard);
 
         for (let i = 0; i < CONFIG.START_HAND[this.headCount]; i++) {
             for (const player of this.players) {

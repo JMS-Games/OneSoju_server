@@ -37,9 +37,7 @@ const GameManager = (function() {
                     return;
                 }
 
-                for (const card of gameInfo.hands[player.uuid]) {
-                    gameInfo.sideDeque.add(card);
-                }
+                gameInfo.sideDeque.add(gameInfo.hands[player.uuid]);
             },
 
             startGame: function(player, sig, res, io) {
