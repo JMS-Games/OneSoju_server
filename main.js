@@ -5,6 +5,7 @@ const io = require('socket.io')(server);
 const SIG = require('./src/signal');
 const CONFIG = require('./src/config');
 const CODE = require('./src/code');
+
 const GM = require('./src/gamemanager').getInstance();
 const Player = require('./src/player');
 

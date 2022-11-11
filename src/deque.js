@@ -8,7 +8,7 @@ class Deque {
     }
 
     init() {
-        for(let i=0;i < 52;i++) {
+        for(let i=0; i < 52; i++) {
             this.queue.push(new Card(i, i % 14, (i / 14).toFixed()))
         }
         // push JOKER
