@@ -22,14 +22,33 @@ const SHAPE = {
     3: 'CLOVER'
 };
 
+const ATK = {
+    1: '3',
+    2: '2',
+    3: '0',
+    4: '-1',
+    5: '0',
+    6: '0',
+    7: '0',
+    8: '0',
+    9: '0',
+    10: '0',
+    11: '0',
+    12: '0',
+    13: '0',
+    14: '10'
+}
+
 Object.freeze(VALUE);
 Object.freeze(SHAPE);
+Object.freeze(ATK);
 
 class Card {
     constructor(id, value, shape) {
         this.id = id;
         this.value = VALUE[value];
         this.shape = SHAPE[shape];
+        this.atk = ATK[value];
     }
 }
 
