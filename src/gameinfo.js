@@ -11,6 +11,7 @@ class GameInfo {
         this.initHands();
 
         this.curTurn = 0;
+        this.direction = CONFIG.DIRECTION.CLOCKWISE;
         this.curCard = null;
         this.state = STATE.BEFORE_START;
 

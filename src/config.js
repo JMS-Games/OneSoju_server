@@ -5,6 +5,11 @@ const CONFIG = {
         3: 9,
         4: 7
     },
+
+    DIRECTION: {
+        CLOCKWISE: 1,
+        ANTI_CLOCKWISE: -1
+    }
 };
 
 Object.freeze(CONFIG);
