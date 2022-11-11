@@ -1,4 +1,5 @@
-const CODE = require("./code");
+const CODE = require('./code');
+const STATE = require('./state');
 const Room = require('./room');
 
 const GameManager = (function() {
