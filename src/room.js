@@ -23,7 +23,7 @@ class Room {
     }
 
     removePlayer(target_player) {
-        for(let i = 0; i < this.players.length; i++) {
+        for (let i = 0; i < this.players.length; i++) {
             if (this.players[i].uuid === target_player.uuid) {
                 this.gameInfo.headCount -= 1;
                 this.headCount -= 1;

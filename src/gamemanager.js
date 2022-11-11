@@ -37,7 +37,7 @@ const GameManager = (function() {
                     return;
                 }
 
-                for (const card in gameInfo.hands[player.uuid]) {
+                for (const card of gameInfo.hands[player.uuid]) {
                     gameInfo.sideDeque.add(card);
                 }
             },
@@ -50,14 +50,14 @@ const GameManager = (function() {
             },
 
             broadcastRoom: function(curPlayer, sig, res, io) {
-                for (const player in curPlayer.getRoom().players) {
+                for (const player of curPlayer.getRoom().players) {
                     io.to(player.id).emit(sig, res);
                 }
             },
 
             broadcastHand: function(curPlayer, sig, res, io, code) {
                 const gameInfo = curPlayer.getRoom().getGameInfo();
-                for (const player in curPlayer.getRoom().players) {
+                for (const player of curPlayer.getRoom().players) {
                     io.to(player.id).emit(sig, res({
                         CODE: code,
                         CURRENT_CARD : gameInfo.curCard,

@@ -22,7 +22,7 @@ class GameInfo {
     }
 
     initHands() {
-        for (const player in this.players) {
+        for (const player of this.players) {
             this.hands[player.uuid] = [];
         }
     }
@@ -32,7 +32,7 @@ class GameInfo {
         this.curCard = this.deque.draw();
 
         for (let i = 0; i < CONFIG.START_HAND[this.headCount]; i++) {
-            for (const player in this.players) {
+            for (const player of this.players) {
                 this.hands[player.uuid].push(this.deque.draw());
             }
         }
