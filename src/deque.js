@@ -30,8 +30,22 @@ class Deque {
     }
 
     add(card) {
-        this.queue.push(card);
-        this.size += 1;
+        if (Array.isArray(card)) {
+            for (const card_ in card) {
+                this.queue.push(card_);
+            }
+            this.size += card.length;
+        } else {
+            this.queue.push(card);
+            this.size += 1;
+        }
+    }
+
+    draw() {
+        if (this.size > 0) {
+            this.size -= 1;
+            return this.queue.pop();
+        }
     }
 }
 
