@@ -1,5 +1,7 @@
 const Deque = require('./deque');
 const STATE = require('./state');
+const CONFIG = require('./config');
+
 
 class GameInfo {
     constructor(players) {
@@ -29,7 +31,7 @@ class GameInfo {
         this.state = STATE.PREPARING;
         this.curCard = this.deque.draw();
 
-        for (let i = 0; i < 7; i++) {
+        for (let i = 0; i < CONFIG.START_HAND[this.headCount]; i++) {
             for (const player in this.players) {
                 this.hands[player.uuid].push(this.deque.draw());
             }

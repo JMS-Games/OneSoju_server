@@ -3,12 +3,13 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 const SIG = require('./src/signal');
+const CONFIG = require('./src/config');
 const GM = require('./src/gamemanager').getInstance();
 const Player = require('./src/player');
 
 
-server.listen(3000, () => {
-    console.log("server is listening on 3000");
+server.listen(CONFIG.PORT, () => {
+    console.log(`server is listening on ${CONFIG.PORT}`);
 });
 
 
