@@ -20,7 +20,6 @@ const GameManager = (function() {
             addPlayer: function(player, res) {
                 const isRoom = this.curRoom ? this.curRoom.addPlayer(player) : false;
                 isRoom || this.createRoom() && this.curRoom.addPlayer(player);
-                player.setRoom(this.curRoom, !isRoom);
 
                 res({
                     CODE: CODE.OK,
@@ -45,7 +44,7 @@ const GameManager = (function() {
 
             startGame: function(player, res) {
                 const room = player.isAdmin ? player.getRoom() : null;
-                const code = room ? CODE.OK : CODE.ERROR;
+                const code = (room && room.headCount > 1) ? CODE.OK : CODE.ERROR;
                 room && room.startGame();
                 res({
                     CODE: code
