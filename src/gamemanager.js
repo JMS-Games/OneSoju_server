@@ -46,8 +46,11 @@ const GameManager = (function() {
                 const room = player.isAdmin ? player.getRoom() : null;
                 const code = (room && room.headCount >= 2) ? CODE.OK : CODE.ERROR;
                 room && room.startGame();
+                const gameInfo = room ? room.getGameInfo() : null;
                 res({
-                    CODE: code
+                    CODE: code,
+                    CURRENT_CARD: gameInfo.curCard,
+                    HAND: gameInfo.hands[player.uuid]
                 });
             },
 
