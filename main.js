@@ -12,6 +12,11 @@ server.listen(CONFIG.PORT, () => {
     console.log(`server is listening on ${CONFIG.PORT}`);
 });
 
+const broadcastRoom = (curPlayer, sig, res) => {
+    for (const player in curPlayer.getRoom().players) {
+        io.to(player.id).emit(sig, res);
+    }
+}
 
 io.on('connection', (socket) => {
     let curPlayer = null;
@@ -35,17 +40,11 @@ io.on('connection', (socket) => {
     });
 
     socket.on(SIG.JOIN_ROOM, (req, res) => {
-        const msg = {msg: `player ${curPlayer.uuid} joined!`};
-        for (const player in curPlayer.getRoom().players) {
-            io.to(player.id).emit(SIG.JOIN_ROOM, msg);
-        }
+        broadcastRoom(curPlayer, SIG.JOIN_ROOM, {msg: `player ${curPlayer.uuid} joined!`});
     });
 
     socket.on(SIG.EXIT_ROOM, (req, res) => {
-        const msg = {msg: `player ${curPlayer.uuid} left the room.`};
-        for (const player in curPlayer.getRoom().players) {
-            io.to(player.id).emit(SIG.EXIT_ROOM, msg);
-        }
+        broadcastRoom(curPlayer, SIG.EXIT_ROOM, {msg: `player ${curPlayer.uuid} left the room.`});
     });
 
 });
