@@ -46,6 +46,7 @@ class Deque {
             this.size -= 1;
             return this.queue.pop();
         }
+        return null;
     }
 }
 

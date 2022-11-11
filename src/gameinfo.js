@@ -4,8 +4,9 @@ const STATE = require('./state');
 class GameInfo {
     constructor(players) {
         this.headCount = players.length;
+        this.players = players;
         this.hands = {};
-        this.initHands(players);
+        this.initHands();
 
         this.curTurn = 0;
         this.curCard = null;
@@ -18,9 +19,20 @@ class GameInfo {
         this.deque.shuffle();
     }
 
-    initHands(players) {
-        for (const player in players) {
+    initHands() {
+        for (const player in this.players) {
             this.hands[player.uuid] = [];
+        }
+    }
+
+    gamePrepareSeq() {
+        this.state = STATE.PREPARING;
+        this.curCard = this.deque.draw();
+
+        for (let i = 0; i < 7; i++) {
+            for (const player in this.players) {
+                this.hands[player.uuid].push(this.deque.draw());
+            }
         }
     }
 
