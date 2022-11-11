@@ -42,8 +42,10 @@ class Room {
     }
 
     startGame() {
-        this.gameInfo = new GameInfo(this.players);
+        this.players = this.players.filter((element) => element != null);
         this.isVaild = false;
+
+        this.gameInfo = new GameInfo(this.players);
         this.gameInfo.gamePrepareSeq();
     }
 }
