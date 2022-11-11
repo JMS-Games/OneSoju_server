@@ -4,6 +4,7 @@ const io = require('socket.io')(server);
 
 const SIG = require('./src/signal');
 const CONFIG = require('./src/config');
+const CODE = require('./src/code');
 const GM = require('./src/gamemanager').getInstance();
 const Player = require('./src/player');
 
@@ -12,11 +13,6 @@ server.listen(CONFIG.PORT, () => {
     console.log(`server is listening on ${CONFIG.PORT}`);
 });
 
-const broadcastRoom = (curPlayer, sig, res) => {
-    for (const player in curPlayer.getRoom().players) {
-        io.to(player.id).emit(sig, res);
-    }
-}
 
 io.on('connection', (socket) => {
     let curPlayer = null;
@@ -40,11 +36,11 @@ io.on('connection', (socket) => {
     });
 
     socket.on(SIG.JOIN_ROOM, (req, res) => {
-        broadcastRoom(curPlayer, SIG.JOIN_ROOM, {msg: `player ${curPlayer.uuid} joined!`});
+        GM.broadcastRoom(curPlayer, SIG.JOIN_ROOM, {CODE: CODE.OK, msg: `player ${curPlayer.uuid} joined!`});
     });
 
     socket.on(SIG.EXIT_ROOM, (req, res) => {
-        broadcastRoom(curPlayer, SIG.EXIT_ROOM, {msg: `player ${curPlayer.uuid} left the room.`});
+        GM.broadcastRoom(curPlayer, SIG.EXIT_ROOM, {CODE: CODE.OK, msg: `player ${curPlayer.uuid} left the room.`});
     });
 
 });

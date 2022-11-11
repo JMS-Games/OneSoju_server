@@ -54,6 +54,12 @@ const GameManager = (function() {
                 });
             },
 
+            broadcastRoom: function(curPlayer, sig, res, io) {
+                for (const player in curPlayer.getRoom().players) {
+                    io.to(player.id).emit(sig, res);
+                }
+            },
+
             curRoom: null,
             rooms: [],
         }
