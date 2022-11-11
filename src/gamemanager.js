@@ -44,7 +44,7 @@ const GameManager = (function() {
 
             startGame: function(player, res) {
                 const room = player.isAdmin ? player.getRoom() : null;
-                const code = (room && room.headCount > 1) ? CODE.OK : CODE.ERROR;
+                const code = (room && room.headCount >= 2) ? CODE.OK : CODE.ERROR;
                 room && room.startGame();
                 res({
                     CODE: code
