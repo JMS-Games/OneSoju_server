@@ -37,11 +37,11 @@ io.on('connection', (socket) => {
     });
 
     socket.on(SIG.JOIN_ROOM, (req, res) => {
-        GM.broadcastRoom(curPlayer, SIG.JOIN_ROOM, {CODE: CODE.OK, msg: `player ${curPlayer.uuid} joined!`});
+        GM.broadcastRoom(curPlayer, SIG.JOIN_ROOM, {CODE: CODE.OK, msg: `player ${curPlayer.uuid} joined!`}, io);
     });
 
     socket.on(SIG.EXIT_ROOM, (req, res) => {
-        GM.broadcastRoom(curPlayer, SIG.EXIT_ROOM, {CODE: CODE.OK, msg: `player ${curPlayer.uuid} left the room.`});
+        GM.broadcastRoom(curPlayer, SIG.EXIT_ROOM, {CODE: CODE.OK, msg: `player ${curPlayer.uuid} left the room.`}, io);
     });
 
 });
