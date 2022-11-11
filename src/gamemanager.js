@@ -42,21 +42,27 @@ const GameManager = (function() {
                 }
             },
 
-            startGame: function(player, res) {
+            startGame: function(player, sig, res, io) {
                 const room = player.isAdmin ? player.getRoom() : null;
                 const code = (room && room.headCount >= 2) ? CODE.OK : CODE.ERROR;
                 room && room.startGame();
-                const gameInfo = room ? room.getGameInfo() : null;
-                res({
-                    CODE: code,
-                    CURRENT_CARD: gameInfo.curCard,
-                    HAND: gameInfo.hands[player.uuid]
-                });
+                this.broadcastHand(player, sig, res, io, code);
             },
 
             broadcastRoom: function(curPlayer, sig, res, io) {
                 for (const player in curPlayer.getRoom().players) {
                     io.to(player.id).emit(sig, res);
+                }
+            },
+
+            broadcastHand: function(curPlayer, sig, res, io, code) {
+                const gameInfo = curPlayer.getRoom().getGameInfo();
+                for (const player in curPlayer.getRoom().players) {
+                    io.to(player.id).emit(sig, res({
+                        CODE: code,
+                        CURRENT_CARD : gameInfo.curCard,
+                        YOUR_HAND: gameInfo.hands[player.uuid],
+                    }));
                 }
             },
 

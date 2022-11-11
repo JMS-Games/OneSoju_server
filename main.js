@@ -32,7 +32,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on(SIG.START_GAME, (req, res) => {
-        GM.startGame(curPlayer, res);
+        GM.startGame(curPlayer, SIG.START_GAME, res, io);
     });
 
     socket.on(SIG.JOIN_ROOM, (req, res) => {
