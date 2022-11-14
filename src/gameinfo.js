@@ -40,6 +40,15 @@ class GameInfo {
         }
     }
 
+    startTurn() {
+        this.state = STATE.TURN_START;
+        const tmpCard = this.deque.draw();
+        if (!tmpCard) {
+            // todo Deque Shuffle
+        }
+        this.hands[this.players[this.curTurn].uuid].push(tmpCard);
+    }
+
     getInstance() {
         return this;
     }
