@@ -1,3 +1,5 @@
+const CONFIG = require('./config');
+
 const VALUE = {
     1: '1',
     2: '2',
@@ -37,17 +39,37 @@ const ATK = {
     12: '0',
     13: '0',
     14: '10'
-}
+};
+
+const TYPE = {
+    1: CONFIG.CARD.ATK,
+    2: CONFIG.CARD.ATK,
+    3: CONFIG.CARD.DEF,
+    4: CONFIG.CARD.NORMAL,
+    5: CONFIG.CARD.NORMAL,
+    6: CONFIG.CARD.NORMAL,
+    7: CONFIG.CARD.NORMAL,
+    8: CONFIG.CARD.NORMAL,
+    9: CONFIG.CARD.NORMAL,
+    10: CONFIG.CARD.NORMAL,
+    11: CONFIG.CARD.JUMP,
+    12: CONFIG.CARD.BACK,
+    13: CONFIG.CARD.REPEAT,
+    14: CONFIG.CARD.ATK
+};
+
 
 Object.freeze(VALUE);
 Object.freeze(SHAPE);
 Object.freeze(ATK);
+Object.freeze(TYPE);
 
 class Card {
     constructor(id, value, shape) {
         this.id = id;
         this.value = VALUE[value];
         this.shape = SHAPE[shape];
+        this.type = TYPE[value];
         this.atk = ATK[value];
     }
 }

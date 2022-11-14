@@ -14,6 +14,7 @@ class GameInfo {
         this.direction = CONFIG.DIRECTION.CLOCKWISE;
         this.curCard = null;
         this.state = STATE.BEFORE_START;
+        this.curAtk = 0;
 
         this.sideDeque = new Deque();
         this.sideDeque.makeEmpty();
