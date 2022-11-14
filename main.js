@@ -44,4 +44,8 @@ io.on('connection', (socket) => {
         GM.broadcastRoom(curPlayer, SIG.EXIT_ROOM, {CODE: CODE.OK, msg: `player ${curPlayer.uuid} left the room.`}, io);
     });
 
+    socket.on(SIG.USE_CARD, (req, res) => {
+        GM.playCard(curPlayer, req.nextCard, res);
+    });
+
 });

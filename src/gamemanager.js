@@ -1,5 +1,6 @@
 const CODE = require('./code');
 const STATE = require('./state');
+const Checker = require('./checker').getInstance();
 const Room = require('./room');
 
 const GameManager = (function() {
@@ -52,6 +53,25 @@ const GameManager = (function() {
                 const code = (room && room.headCount >= 2) ? CODE.OK : CODE.ERROR;
                 room && room.startGame();
                 this.broadcastHand(player, sig, res, io, code);
+            },
+
+            playCard: function(player, card, res) {
+                const room = player.getRoom();
+                const gameInfo = room.getGameInfo();
+                if (Checker.isIllegal(gameInfo.curCard, card, gameInfo.hands[player.uuid])) {
+                    res({
+                        CODE: CODE.ERROR,
+                        msg: "Invalid Card request"
+                    })
+                    return;
+                }
+                gameInfo.sideDeque.add(gameInfo.curCard);
+                gameInfo.curCard = card;
+                // todo delete card on hand
+
+                res({
+                    CODE: CODE.OK
+                })
             },
 
             broadcastRoom: function(curPlayer, sig, res, io) {
