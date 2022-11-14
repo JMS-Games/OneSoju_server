@@ -15,9 +15,10 @@ const CONFIG = {
         NORMAL: 0,
         ATK: 1,
         DEF: 2,
-        JUMP: 3,
-        BACK: 4,
-        REPEAT: 5
+        ANY: 3,
+        JUMP: 4,
+        BACK: 5,
+        REPEAT: 6
     }
 };
 
