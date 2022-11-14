@@ -48,7 +48,7 @@ class GameInfo {
         }
     }
 
-    playingTurn(card) {
+    playTurn(card) {
         this.state = STATE.PLAYING;
 
         switch (card.type) {
