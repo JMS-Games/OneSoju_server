@@ -50,6 +50,19 @@ class GameInfo {
         this.hands[this.players[this.curTurn].uuid].push(tmpCard);
     }
 
+    playingTurn(card) {
+        this.state = STATE.PLAYING;
+        this.curCard = card;
+    }
+
+    endTurn() {
+        this.state = STATE.TURN_END;
+        if (this.direction === CONFIG.DIRECTION.CLOCKWISE) {
+            this.curTurn += 1;
+            this.curTurn %= this.headCount;
+        }
+    }
+
     getInstance() {
         return this;
     }
