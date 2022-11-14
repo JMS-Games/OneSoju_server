@@ -11,7 +11,7 @@ const CONFIG = {
         ANTI_CLOCKWISE: -1
     },
 
-    CARD: {
+    CARD_TYPE: {
         NORMAL: 0,
         ATK: 1,
         DEF: 2,
@@ -19,6 +19,23 @@ const CONFIG = {
         JUMP: 4,
         BACK: 5,
         REPEAT: 6
+    },
+
+    CARD_VALUE: {
+        'A': 1,
+        '2': 2,
+        '3': 3,
+        '4': 4,
+        '5': 5,
+        '6': 6,
+        '7': 7,
+        '8': 8,
+        '9': 9,
+        '10': 10,
+        'J': 11,
+        'Q': 12,
+        'K': 13,
+        'JOKER': 14
     }
 };
 

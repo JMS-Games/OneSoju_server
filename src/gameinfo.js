@@ -52,20 +52,20 @@ class GameInfo {
         this.state = STATE.PLAYING;
 
         switch (card.type) {
-            case CONFIG.CARD.NORMAL: break;
-            case CONFIG.CARD.ATK:
+            case CONFIG.CARD_TYPE.NORMAL: break;
+            case CONFIG.CARD_TYPE.ATK:
                 this.curAtk += card.atk; break;
-            case CONFIG.CARD.DEF:
+            case CONFIG.CARD_TYPE.DEF:
                 this.curAtk = 0; break;
-            case CONFIG.CARD.ANY:
+            case CONFIG.CARD_TYPE.ANY:
                 // todo card 7
                 break;
-            case CONFIG.CARD.JUMP:
+            case CONFIG.CARD_TYPE.JUMP:
                 this.curTurn += this.direction;
                 this.curTurn %= this.headCount; break;
-            case CONFIG.CARD.BACK:
+            case CONFIG.CARD_TYPE.BACK:
                 this.direction *= -1; break;
-            case CONFIG.CARD.REPEAT:
+            case CONFIG.CARD_TYPE.REPEAT:
                 this.curTurn -= this.direction;
                 this.curTurn %= this.headCount; break;
         }
