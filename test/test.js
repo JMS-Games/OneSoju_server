@@ -6,7 +6,7 @@ const GM = require('../src/gamemanager').getInstance();
 const Player = require('../src/player');
 
 
-describe('test4test', () => {
+describe('Unit Test Sequence', () => {
     /*
     before(() => {
         console.log('before test hook');
@@ -25,10 +25,6 @@ describe('test4test', () => {
     });
     */
     describe('Create Room Sequence Test', () => {
-        it('Create Room', () => {
-            assert.equal(GM.createRoom(), true);
-        });
-
         const p1 = new Player(0, 0);
         const p2 = new Player(1, 1);
         const p3 = new Player(2, 2);
@@ -36,7 +32,7 @@ describe('test4test', () => {
         const p5 = new Player(4, 4);
         const p6 = new Player(5, 5);
 
-        it('Player1 Enter', () => {
+        it('Player1 Enter(Create Room)', () => {
             GM.addPlayer(p1, (result) => {
                 assert.equal(result.CODE, CODE.OK);
             });
@@ -69,11 +65,11 @@ describe('test4test', () => {
             assert.equal(p.id, 0);
         });
 
-        it('Player1 Left', () => {
+        it('Player1(Admin) Left', () => {
             GM.removePlayer(p1);
         });
 
-        it('Room 1 Admin Id expected 1', () => {
+        it('Room 1 Admin Id expected 1 now', () => {
             const p = GM.rooms[0].players.find(element => element && GM.findPlayerById(element.id).isAdmin);
             assert.equal(p.id, 1);
         });
@@ -84,7 +80,7 @@ describe('test4test', () => {
             });
         });
 
-        it('Room Count Check expected 1 ', () => {
+        it('Room Count Check expected 1 again', () => {
             assert.equal(GM.rooms.length, 1);
         });
 
@@ -94,7 +90,7 @@ describe('test4test', () => {
             });
         });
 
-        it('Room Count Check expected 2', () => {
+        it('Room Count Check expected 2 now', () => {
             assert.equal(GM.rooms.length, 2);
         });
     });
