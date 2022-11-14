@@ -1,6 +1,7 @@
 const assert = require('assert');
 
 const CODE = require('../src/code');
+const SIG = require('../src/signal');
 
 const GM = require('../src/gamemanager').getInstance();
 const Player = require('../src/player');
@@ -24,14 +25,15 @@ describe('Unit Test Sequence', () => {
         console.log('afterEach hook');
     });
     */
-    describe('Create Room Sequence Test', () => {
-        const p1 = new Player(0, 0);
-        const p2 = new Player(1, 1);
-        const p3 = new Player(2, 2);
-        const p4 = new Player(3, 3);
-        const p5 = new Player(4, 4);
-        const p6 = new Player(5, 5);
 
+    const p1 = new Player(0, 0);
+    const p2 = new Player(1, 1);
+    const p3 = new Player(2, 2);
+    const p4 = new Player(3, 3);
+    const p5 = new Player(4, 4);
+    const p6 = new Player(5, 5);
+
+    describe('Create Room Sequence Test', () => {
         it('Player1 Enter(Create Room)', () => {
             GM.addPlayer(p1, (result) => {
                 assert.equal(result.CODE, CODE.OK);
@@ -92,6 +94,17 @@ describe('Unit Test Sequence', () => {
 
         it('Room Count Check expected 2 now', () => {
             assert.equal(GM.rooms.length, 2);
+        });
+    });
+
+    describe('Game Starting Sequence Test', () => {
+        it('Game Start on Room 1 by player2', () => {
+            // todo make socket manager for io
+            /*
+            GM.startGame(p2, SIG.START_GAME, (result) => {
+                assert.equal(result.CODE, CODE.OK);
+            }, null);
+            */
         });
     });
 });
