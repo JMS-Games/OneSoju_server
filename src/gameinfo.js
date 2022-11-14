@@ -80,11 +80,12 @@ class GameInfo {
     }
 
     draw() {
-        const tmpCard = this.deque.draw();
-        if (!tmpCard) {
-            // todo Deque Shuffle
+        if (this.deque.getSize() <= 0) {
+            this.deque.add(this.sideDeque).shuffle();
+            this.sideDeque.makeEmpty();
         }
-        this.hands[this.players[this.curTurn].uuid].push(tmpCard);
+
+        this.hands[this.players[this.curTurn].uuid].push(this.deque.draw());
     }
 }
 

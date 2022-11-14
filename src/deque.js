@@ -39,6 +39,7 @@ class Deque {
             this.queue.push(card);
             this.size += 1;
         }
+        return this;
     }
 
     draw() {
