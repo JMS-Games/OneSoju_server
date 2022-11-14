@@ -47,6 +47,8 @@ class Room {
 
         this.gameInfo = new GameInfo(this.players);
         this.gameInfo.gamePrepareSeq();
+
+        this.gameInfo.startTurn();
     }
 }
 

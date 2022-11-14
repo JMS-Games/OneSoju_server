@@ -43,24 +43,45 @@ class GameInfo {
 
     startTurn() {
         this.state = STATE.TURN_START;
-        const tmpCard = this.deque.draw();
-        if (!tmpCard) {
-            // todo Deque Shuffle
+        if (this.curAtk > 0) {
+            // todo under atk
         }
-        this.hands[this.players[this.curTurn].uuid].push(tmpCard);
     }
 
     playingTurn(card) {
         this.state = STATE.PLAYING;
+
+        switch (card.type) {
+            case CONFIG.CARD.NORMAL: break;
+            case CONFIG.CARD.ATK:
+                this.curAtk += card.atk; break;
+            case CONFIG.CARD.DEF:
+                this.curAtk = 0; break;
+            case CONFIG.CARD.JUMP:
+                this.curTurn += this.direction;
+                this.curTurn %= this.headCount; break;
+            case CONFIG.CARD.BACK:
+                this.direction *= -1; break;
+            case CONFIG.CARD.REPEAT:
+                this.curTurn -= this.direction;
+                this.curTurn %= this.headCount; break;
+        }
+
         this.curCard = card;
     }
 
     endTurn() {
         this.state = STATE.TURN_END;
-        if (this.direction === CONFIG.DIRECTION.CLOCKWISE) {
-            this.curTurn += 1;
-            this.curTurn %= this.headCount;
+        this.curTurn += this.direction;
+        this.curTurn %= this.headCount;
+    }
+
+    draw() {
+        const tmpCard = this.deque.draw();
+        if (!tmpCard) {
+            // todo Deque Shuffle
         }
+        this.hands[this.players[this.curTurn].uuid].push(tmpCard);
     }
 
     getInstance() {
