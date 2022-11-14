@@ -72,7 +72,7 @@ const GameManager = (function() {
             },
 
             findPlayerById: function(id) {
-                return this.players.find(element => element.id === id);
+                return this.players.find(element => element && element.id === id);
             },
 
             curRoom: null,
