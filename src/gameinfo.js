@@ -57,6 +57,9 @@ class GameInfo {
                 this.curAtk += card.atk; break;
             case CONFIG.CARD.DEF:
                 this.curAtk = 0; break;
+            case CONFIG.CARD.ANY:
+                // todo card 7
+                break;
             case CONFIG.CARD.JUMP:
                 this.curTurn += this.direction;
                 this.curTurn %= this.headCount; break;

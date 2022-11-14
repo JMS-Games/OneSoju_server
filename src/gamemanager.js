@@ -20,6 +20,7 @@ const GameManager = (function() {
             addPlayer: function(player, res) {
                 const isRoom = this.curRoom ? this.curRoom.addPlayer(player) : false;
                 isRoom || this.createRoom() && this.curRoom.addPlayer(player);
+                this.players.push(player);
 
                 res({
                     CODE: CODE.OK,
@@ -30,8 +31,14 @@ const GameManager = (function() {
             removePlayer: function(player) {
                 const room = player.getRoom();
                 const gameInfo = room.getGameInfo();
+                const id = room.removePlayer(player);
 
-                room.removePlayer(player);
+                if (player.isAdmin) {
+                    const cPlayer = this.findPlayerById(id);
+                    cPlayer.isAdmin = true;
+                }
+
+                this.players[this.players.findIndex(element => element.uuid === player.uuid)] = null;
 
                 if (gameInfo.state === STATE.BEFORE_START || gameInfo.state === STATE.GAME_FINISHED) {
                     return;
@@ -64,8 +71,13 @@ const GameManager = (function() {
                 }
             },
 
+            findPlayerById: function(id) {
+                return this.players.find(element => element.id === id);
+            },
+
             curRoom: null,
             rooms: [],
+            players: []
         }
     }
 

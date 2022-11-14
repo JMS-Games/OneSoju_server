@@ -23,6 +23,8 @@ class Room {
     }
 
     removePlayer(target_player) {
+        let retPlayerId = this.players[1].id;
+
         for (let i = 0; i < this.players.length; i++) {
             if (this.players[i].uuid === target_player.uuid) {
                 this.gameInfo.headCount -= 1;
@@ -30,7 +32,10 @@ class Room {
                 this.players[i] = null;
                 return;
             }
+            retPlayerId = this.players[i].id;
         }
+
+        return retPlayerId;
     }
 
     getIsValid() {
