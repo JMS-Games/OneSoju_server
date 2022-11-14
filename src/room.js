@@ -10,9 +10,7 @@ class Room {
 
     addPlayer(player) {
         if (this.headCount < 4) {
-            if (this.headCount === 0) {
-                player.setRoom(this, true);
-            }
+            player.setRoom(this, this.headCount === 0);
 
             this.headCount += 1;
             this.players.push({id: player.id, uuid: player.uuid});
@@ -27,10 +25,10 @@ class Room {
 
         for (let i = 0; i < this.players.length; i++) {
             if (this.players[i].uuid === target_player.uuid) {
-                this.gameInfo.headCount -= 1;
+                this.gameInfo && (this.gameInfo.headCount -= 1);
                 this.headCount -= 1;
                 this.players[i] = null;
-                return;
+                return retPlayerId;
             }
             retPlayerId = this.players[i].id;
         }
@@ -43,7 +41,7 @@ class Room {
     }
 
     getGameInfo() {
-        return this.gameInfo.getInstance();
+        return this.gameInfo;
     }
 
     startGame() {

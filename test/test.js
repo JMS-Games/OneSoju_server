@@ -29,26 +29,31 @@ describe('test4test', () => {
             assert.equal(GM.createRoom(), true);
         });
 
+        const p1 = new Player(0, 0);
+        const p2 = new Player(1, 1);
+        const p3 = new Player(2, 2);
+        const p4 = new Player(3, 3);
+
         it('Player1 Enter', () => {
-            GM.addPlayer(new Player(0, 0), (result) => {
+            GM.addPlayer(p1, (result) => {
                 assert.equal(result.CODE, CODE.OK);
             });
         });
 
         it('Player2 Enter', () => {
-            GM.addPlayer(new Player(1, 1), (result) => {
+            GM.addPlayer(p2, (result) => {
                 assert.equal(result.CODE, CODE.OK);
             });
         });
 
         it('Player3 Enter', () => {
-            GM.addPlayer(new Player(2, 2), (result) => {
+            GM.addPlayer(p3, (result) => {
                 assert.equal(result.CODE, CODE.OK);
             });
         });
 
         it('Player4 Enter', () => {
-            GM.addPlayer(new Player(3, 3), (result) => {
+            GM.addPlayer(p4, (result) => {
                 assert.equal(result.CODE, CODE.OK);
             });
         });
@@ -57,10 +62,18 @@ describe('test4test', () => {
             assert.equal(GM.rooms.length, 1);
         });
 
+        it('Player4 Left', () => {
+            GM.removePlayer(p4);
+        });
+
         it('Player5 Enter', () => {
             GM.addPlayer(new Player(4, 4), (result) => {
                 assert.equal(result.CODE, CODE.OK);
             });
+        });
+
+        it('Room Count Check expected 1', () => {
+            assert.equal(GM.rooms.length, 1);
         });
 
         it('Room Count Check expected 2', () => {

@@ -86,10 +86,6 @@ class GameInfo {
         }
         this.hands[this.players[this.curTurn].uuid].push(tmpCard);
     }
-
-    getInstance() {
-        return this;
-    }
 }
 
 module.exports = GameInfo;

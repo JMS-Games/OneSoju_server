@@ -40,11 +40,11 @@ const GameManager = (function() {
 
                 this.players[this.players.findIndex(element => element.uuid === player.uuid)] = null;
 
-                if (gameInfo.state === STATE.BEFORE_START || gameInfo.state === STATE.GAME_FINISHED) {
+                if (gameInfo && (gameInfo.state === STATE.BEFORE_START || gameInfo.state === STATE.GAME_FINISHED)) {
                     return;
                 }
 
-                gameInfo.sideDeque.add(gameInfo.hands[player.uuid]);
+                gameInfo && gameInfo.sideDeque.add(gameInfo.hands[player.uuid]);
             },
 
             startGame: function(player, sig, res, io) {
