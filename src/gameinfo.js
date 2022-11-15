@@ -69,8 +69,6 @@ class GameInfo {
                 this.curTurn -= this.direction;
                 this.curTurn %= this.headCount; break;
         }
-
-        this.curCard = card;
     }
 
     endTurn() {
@@ -94,6 +92,7 @@ class GameInfo {
 
         const uuid = this.players[this.curTurn].uuid;
         this.hands[uuid] = this.hands[uuid].filter(element => element.id !== card.id);
+        this.playTurn(card);
     }
 }
 
