@@ -62,7 +62,7 @@ const GameManager = (function() {
                     res({
                         CODE: CODE.ERROR,
                         msg: "Invalid Card request"
-                    })
+                    });
                     return;
                 }
                 gameInfo.sideDeque.add(gameInfo.curCard);
@@ -71,7 +71,7 @@ const GameManager = (function() {
 
                 res({
                     CODE: CODE.OK
-                })
+                });
             },
 
             broadcastRoom: function(curPlayer, sig, res, io) {
