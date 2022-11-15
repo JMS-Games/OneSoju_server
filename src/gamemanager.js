@@ -59,16 +59,11 @@ const GameManager = (function() {
                 const room = player.getRoom();
                 const gameInfo = room.getGameInfo();
                 if (Checker.isIllegal(gameInfo.curCard, card, gameInfo.hands[player.uuid])) {
-                    res({
-                        CODE: CODE.ERROR,
-                        msg: "Invalid Card request"
-                    });
-                    return;
+                    res({CODE: CODE.ERROR});
+                } else {
+                    gameInfo.playCard(card);
+                    res({CODE: CODE.OK});
                 }
-                gameInfo.playCard(card);
-                res({
-                    CODE: CODE.OK
-                });
             },
 
             broadcastRoom: function(curPlayer, sig, res, io) {
