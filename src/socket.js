@@ -8,13 +8,15 @@ const GM = require('./gamemanager').getInstance();
 const SocketManager = (function() {
     let instance;
 
-    function init(io_) {
+    function init() {
         return {
             getIo: function () {
                 return this.io;
             },
 
-            boot: function () {
+            boot: function (io_) {
+                this.io = io_;
+
                 this.io.on('connection', (socket) => {
                     let curPlayer = null;
 
@@ -47,16 +49,16 @@ const SocketManager = (function() {
                 });
             },
 
-            io: io_
+            io: null
         }
     }
 
     return {
-        getInstance: function(io_) {
+        getInstance: function() {
             if (instance) {
                 return instance;
             }
-            instance = init(io_);
+            instance = init();
             return instance;
         }
     }
