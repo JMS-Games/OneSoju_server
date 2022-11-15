@@ -93,6 +93,14 @@ class GameInfo {
         const uuid = this.players[this.curTurn].uuid;
         this.hands[uuid] = this.hands[uuid].filter(element => element.id !== card.id);
         this.playTurn(card);
+
+        if (this.hands[uuid].length === 0) {
+            // todo remove player from game set
+        }
+    }
+
+    endGame() {
+        this.state = STATE.GAME_FINISHED;
     }
 }
 
