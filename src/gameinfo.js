@@ -87,6 +87,14 @@ class GameInfo {
 
         this.hands[this.players[this.curTurn].uuid].push(this.deque.draw());
     }
+
+    playCard(card) {
+        this.sideDeque.add(this.curCard);
+        this.curCard = card;
+
+        const uuid = this.players[this.curTurn].uuid;
+        this.hands[uuid] = this.hands[uuid].filter(element => element.id !== card.id);
+    }
 }
 
 module.exports = GameInfo;

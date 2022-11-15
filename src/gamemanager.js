@@ -65,10 +65,7 @@ const GameManager = (function() {
                     });
                     return;
                 }
-                gameInfo.sideDeque.add(gameInfo.curCard);
-                gameInfo.curCard = card;
-                // todo delete card on hand
-
+                gameInfo.playCard(card);
                 res({
                     CODE: CODE.OK
                 });
