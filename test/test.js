@@ -3,8 +3,13 @@ const assert = require('assert');
 const CODE = require('../src/code');
 const SIG = require('../src/signal');
 
+const app = require('express')();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
 const GM = require('../src/gamemanager').getInstance();
 const Player = require('../src/player');
+const SocketManager = require('../src/socket').getInstance(io);
 
 
 describe('Unit Test Sequence', () => {
@@ -99,12 +104,9 @@ describe('Unit Test Sequence', () => {
 
     describe('Game Starting Sequence Test', () => {
         it('Game Start on Room 1 by player2', () => {
-            // todo make socket manager for io
-            /*
             GM.startGame(p2, SIG.START_GAME, (result) => {
                 assert.equal(result.CODE, CODE.OK);
-            }, null);
-            */
+            }, SocketManager.getIo());
         });
     });
 });
