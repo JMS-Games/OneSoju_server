@@ -1,6 +1,6 @@
 const CODE = require('./code');
 const STATE = require('./state');
-const Checker = require('./checker').getInstance();
+const Checker = require('./checker');
 const Room = require('./room');
 
 const GameManager = (function() {
@@ -58,7 +58,7 @@ const GameManager = (function() {
             playCard: function(player, card, res) {
                 const room = player.getRoom();
                 const gameInfo = room.getGameInfo();
-                if (Checker.isIllegal(gameInfo.curCard, card, gameInfo.hands[player.uuid])) {
+                if (this.checker.isIllegal(gameInfo.curCard, card, gameInfo.hands[player.uuid])) {
                     res({CODE: CODE.ERROR});
                 } else {
                     gameInfo.playCard(card);
@@ -89,7 +89,8 @@ const GameManager = (function() {
 
             curRoom: null,
             rooms: [],
-            players: []
+            players: [],
+            checker: new Checker()
         }
     }
 
