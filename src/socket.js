@@ -20,24 +20,16 @@ class SocketManager {
 
             socket.on('disconnect', () => {
                 console.log(`client disconnected from socket id: ${socket.id}, player uuid: ${curPlayer.uuid}`);
-                curPlayer && GM.removePlayer(curPlayer);
+                curPlayer && GM.removePlayer(curPlayer, this.io);
             });
 
             socket.on(SIG.REQUEST_MATCH, (req, res) => {
                 curPlayer = new Player(socket.id, req.uuid);
-                GM.addPlayer(curPlayer, res);
+                GM.addPlayer(curPlayer, res, this.io);
             });
 
             socket.on(SIG.START_GAME, (req, res) => {
                 GM.startGame(curPlayer, SIG.START_GAME, res, this.io);
-            });
-
-            socket.on(SIG.JOIN_ROOM, (req, res) => {
-                GM.broadcastRoom(curPlayer, SIG.JOIN_ROOM, {CODE: CODE.OK, msg: `player ${curPlayer.uuid} joined!`}, this.io);
-            });
-
-            socket.on(SIG.EXIT_ROOM, (req, res) => {
-                GM.broadcastRoom(curPlayer, SIG.EXIT_ROOM, {CODE: CODE.OK, msg: `player ${curPlayer.uuid} left the room.`}, this.io);
             });
 
             socket.on(SIG.USE_CARD, (req, res) => {

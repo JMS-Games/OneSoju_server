@@ -2,6 +2,7 @@ const CODE = require('./code');
 const STATE = require('./state');
 const Checker = require('./checker');
 const Room = require('./room');
+const SIG = require("./signal");
 
 class GameManager {
     constructor() {
@@ -21,7 +22,7 @@ class GameManager {
         return true;
     }
 
-    addPlayer(player, res) {
+    addPlayer(player, res, io) {
         const isRoom = this.curRoom ? this.curRoom.addPlayer(player) : false;
         isRoom || this.createRoom() && this.curRoom.addPlayer(player);
         this.players.push(player);
@@ -30,9 +31,11 @@ class GameManager {
             CODE: CODE.OK,
             room: player.getRoom()
         });
+
+        this.broadcastRoom(player, SIG.JOIN_ROOM, {CODE: CODE.OK, msg: `player ${player.uuid} joined!`}, io);
     }
 
-    removePlayer(player) {
+    removePlayer(player, io) {
         const room = player.getRoom();
         const gameInfo = room.getGameInfo();
         const id = room.removePlayer(player);
@@ -43,6 +46,7 @@ class GameManager {
         }
 
         this.players[this.players.findIndex(element => element.uuid === player.uuid)] = null;
+        this.broadcastRoom(player, SIG.EXIT_ROOM, {CODE: CODE.OK, msg: `player ${player.uuid} left the room.`}, io);
 
         if (gameInfo && (gameInfo.state === STATE.BEFORE_START || gameInfo.state === STATE.GAME_FINISHED)) {
             return;
