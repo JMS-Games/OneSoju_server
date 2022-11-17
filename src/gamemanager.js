@@ -77,8 +77,8 @@ const GameManager = (function() {
                 for (const player of curPlayer.getRoom().players) {
                     io.to(player.id).emit(sig, res({
                         CODE: code,
-                        CURRENT_CARD : gameInfo.curCard,
-                        YOUR_HAND: gameInfo.hands[player.uuid],
+                        currentCard: gameInfo.curCard,
+                        yourHand: gameInfo.hands[player.uuid],
                     }));
                 }
             },
