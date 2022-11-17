@@ -82,8 +82,8 @@ class GameManager {
         room.players.forEach(element => {
             io.to(element.id).emit(sig, res({
                 CODE: code,
-                currentCard: gameInfo.curCard,
-                yourHand: gameInfo.hands[element.uuid],
+                currentCard: gameInfo ? gameInfo.curCard : null,
+                yourHand: gameInfo ? gameInfo.hands[element.uuid] : null
             }));
         });
     }
