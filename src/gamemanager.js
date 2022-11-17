@@ -70,20 +70,22 @@ class GameManager {
     }
 
     broadcastRoom(curPlayer, sig, res, io) {
-        for (const player of curPlayer.getRoom().players) {
-            io.to(player.id).emit(sig, res);
-        }
+        const room = curPlayer.getRoom();
+        room.players.forEach(element => {
+            io.to(element.id).emit(sig, res);
+        });
     }
 
     broadcastHand(curPlayer, sig, res, io, code) {
-        const gameInfo = curPlayer.getRoom().getGameInfo();
-        for (const player of curPlayer.getRoom().players) {
-            io.to(player.id).emit(sig, res({
+        const room = curPlayer.getRoom();
+        const gameInfo = room.getGameInfo();
+        room.players.forEach(element => {
+            io.to(element.id).emit(sig, res({
                 CODE: code,
                 currentCard: gameInfo.curCard,
-                yourHand: gameInfo.hands[player.uuid],
+                yourHand: gameInfo.hands[element.uuid],
             }));
-        }
+        });
     }
 
     findPlayerById(id) {

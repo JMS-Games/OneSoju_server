@@ -24,9 +24,9 @@ class GameInfo {
     }
 
     initHands() {
-        for (const player of this.players) {
-            this.hands[player.uuid] = [];
-        }
+        this.players.forEach(element => {
+            this.hands[element.uuid] = [];
+        });
     }
 
     gamePrepareSeq() {
@@ -35,9 +35,9 @@ class GameInfo {
         this.sideDeque.add(this.curCard);
 
         for (let i = 0; i < CONFIG.START_HAND[this.headCount]; i++) {
-            for (const player of this.players) {
-                this.hands[player.uuid].push(this.deque.draw());
-            }
+            this.players.forEach(element => {
+                this.hands[element.uuid].push(this.deque.draw());
+            });
         }
     }
 

@@ -31,9 +31,9 @@ class Deque {
 
     add(card) {
         if (Array.isArray(card)) {
-            for (const card_ of card) {
-                this.queue.push(card_);
-            }
+            card.forEach(element => {
+                this.queue.push(element);
+            });
             this.size += card.length;
         } else {
             this.queue.push(card);
