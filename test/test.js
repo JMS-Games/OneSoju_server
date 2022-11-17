@@ -7,9 +7,11 @@ const app = require('express')();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
+const SocketManager = require('../src/socket');
+const socketManager = new SocketManager(io);
+
 const GM = require('../src/gamemanager').getInstance();
 const Player = require('../src/player');
-const SocketManager = require('../src/socket').getInstance(io);
 
 
 describe('Unit Test Sequence', () => {
@@ -106,7 +108,7 @@ describe('Unit Test Sequence', () => {
         it('Game Start on Room 1 by player2', () => {
             GM.startGame(p2, SIG.START_GAME, (result) => {
                 assert.equal(result.CODE, CODE.OK);
-            }, SocketManager.getIo());
+            }, socketManager.getIo());
         });
     });
 });
