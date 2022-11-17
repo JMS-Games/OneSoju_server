@@ -2,7 +2,8 @@ const SIG = require('./signal');
 const CODE = require('./code');
 
 const Player = require('./player');
-const GM = require('./gamemanager').getInstance();
+const GameManager = require('./gamemanager');
+const GM = new GameManager();
 
 class SocketManager {
     constructor(io) {

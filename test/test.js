@@ -10,7 +10,8 @@ const io = require('socket.io')(server);
 const SocketManager = require('../src/socket');
 const socketManager = new SocketManager(io);
 
-const GM = require('../src/gamemanager').getInstance();
+const GameManager = require('../src/gamemanager');
+const GM = new GameManager();
 const Player = require('../src/player');
 
 
