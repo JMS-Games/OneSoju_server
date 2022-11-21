@@ -1,8 +1,8 @@
 const CODE = require('./code');
 const STATE = require('./state');
+const SIG = require('./signal');
 const Checker = require('./checker');
 const Room = require('./room');
-const SIG = require("./signal");
 
 class GameManager {
     constructor() {
