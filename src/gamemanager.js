@@ -29,7 +29,7 @@ class GameManager {
 
         res({
             CODE: CODE.OK,
-            room: player.getRoom()
+            players: player.getRoom().players
         });
 
         this.broadcastRoom(player, SIG.JOIN_ROOM, {CODE: CODE.OK, msg: `player ${player.uuid} joined!`}, io);
