@@ -4,7 +4,7 @@ class Room {
     constructor() {
         this.players = [];
         this.headCount = 0;
-        this.isVaild = true;
+        this.isValid = true;
         this.gameInfo = null;
     }
 
@@ -16,7 +16,7 @@ class Room {
             this.players.push({id: player.id, uuid: player.uuid});
             return true;
         }
-        this.isVaild = false;
+        this.isValid = false;
         return false;
     }
 
@@ -37,7 +37,7 @@ class Room {
     }
 
     getIsValid() {
-        return this.isVaild;
+        return this.isValid;
     }
 
     getGameInfo() {
@@ -46,7 +46,7 @@ class Room {
 
     startGame() {
         this.players = this.players.filter((element) => element != null);
-        this.isVaild = false;
+        this.isValid = false;
 
         this.gameInfo = new GameInfo(this.players);
         this.gameInfo.gamePrepareSeq();
