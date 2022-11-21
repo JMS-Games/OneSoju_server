@@ -32,7 +32,11 @@ class GameManager {
             players: player.getRoom().players
         });
 
-        this.broadcastRoom(player, SIG.JOIN_ROOM, {CODE: CODE.OK, msg: `player ${player.uuid} joined!`}, io);
+        this.broadcastRoom(player, SIG.JOIN_ROOM, {
+            CODE: CODE.OK,
+            msg: `player ${player.uuid} joined!`,
+            player: player
+        }, io);
     }
 
     removePlayer(player, io) {
@@ -46,7 +50,11 @@ class GameManager {
         }
 
         this.players[this.players.findIndex(element => element.uuid === player.uuid)] = null;
-        this.broadcastRoom(player, SIG.EXIT_ROOM, {CODE: CODE.OK, msg: `player ${player.uuid} left the room.`}, io);
+        this.broadcastRoom(player, SIG.EXIT_ROOM, {
+            CODE: CODE.OK,
+            msg: `player ${player.uuid} left the room.`,
+            player: player
+        }, io);
 
         if (gameInfo && (gameInfo.state === STATE.BEFORE_START || gameInfo.state === STATE.GAME_FINISHED)) {
             return;
