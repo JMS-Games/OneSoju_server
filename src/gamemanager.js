@@ -109,9 +109,7 @@ class GameManager {
             res({CODE: CODE.OK});
         }
 
-        return new Promise((resolve, reject) => {
-            isIllegal ? reject() : resolve();
-        });
+        isIllegal && throw new Error(CODE.ERROR);
     }
 
     broadcastRoom(curPlayer, sig, res, io) {
