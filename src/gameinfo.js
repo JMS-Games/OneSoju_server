@@ -14,7 +14,7 @@ class GameInfo {
         this.direction = CONFIG.DIRECTION.CLOCKWISE;
         this.curCard = null;
         this.state = STATE.BEFORE_START;
-        this.curAtk = 0;
+        this.curAtk = 1;
 
         this.sideDeque = new Deque();
         this.sideDeque.makeEmpty();
@@ -78,12 +78,16 @@ class GameInfo {
     }
 
     draw() {
-        if (this.deque.getSize() <= 0) {
-            this.deque.add(this.sideDeque).shuffle();
-            this.sideDeque.makeEmpty();
-        }
+        while (this.curAtk > 0) {
+            if (this.deque.getSize() <= 0) {
+                this.deque.add(this.sideDeque).shuffle();
+                this.sideDeque.makeEmpty();
+            }
 
-        this.hands[this.players[this.curTurn].uuid].push(this.deque.draw());
+            this.hands[this.players[this.curTurn].uuid].push(this.deque.draw());
+            this.curAtk -= 1;
+        }
+        this.curAtk = 1;
     }
 
     playCard(card) {

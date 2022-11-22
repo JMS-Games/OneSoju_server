@@ -32,6 +32,10 @@ class SocketManager {
                 GM.startGame(curPlayer, SIG.START_GAME, res, this.io);
             });
 
+            socket.on(SIG.DRAW_CARD, (req, res) => {
+                GM.drawCard(curPlayer, res);
+            });
+
             socket.on(SIG.USE_CARD, (req, res) => {
                 GM.playCard(curPlayer, req.nextCard, res);
             });

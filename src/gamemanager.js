@@ -70,6 +70,18 @@ class GameManager {
         this.broadcastHand(player, sig, res, io, code);
     }
 
+    drawCard(player, res) {
+        const room = player.getRoom();
+        const gameInfo = room.getGameInfo();
+        gameInfo.draw();
+        gameInfo.endTurn();
+
+        res({
+            CODE: CODE.OK,
+            yourHand: gameInfo.hands[player.uuid]
+        });
+    }
+
     playCard(player, card, res) {
         const room = player.getRoom();
         const gameInfo = room.getGameInfo();
