@@ -35,7 +35,7 @@ class GameManager {
         this.broadcastRoom(player, SIG.JOIN_ROOM, {
             CODE: CODE.OK,
             msg: `player ${player.uuid} joined!`,
-            player: player
+            player: player.uuid
         }, io);
     }
 
@@ -53,7 +53,7 @@ class GameManager {
         this.broadcastRoom(player, SIG.EXIT_ROOM, {
             CODE: CODE.OK,
             msg: `player ${player.uuid} left the room.`,
-            player: player
+            player: player.uuid
         }, io);
 
         if (gameInfo && (gameInfo.state === STATE.BEFORE_START || gameInfo.state === STATE.GAME_FINISHED)) {
