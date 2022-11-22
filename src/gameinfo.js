@@ -43,9 +43,6 @@ class GameInfo {
 
     startTurn() {
         this.state = STATE.TURN_START;
-        if (this.curAtk > 0) {
-            // todo under atk
-        }
     }
 
     playTurn(card) {

@@ -68,6 +68,7 @@ class GameManager {
         const code = (room && room.headCount >= 2) ? CODE.OK : CODE.ERROR;
         room && room.startGame();
         this.broadcastHand(player, sig, res, io, code);
+        this.startTurn(player, io);
     }
 
     drawCard(player, res) {
@@ -79,6 +80,18 @@ class GameManager {
         res({
             CODE: CODE.OK,
             yourHand: gameInfo.hands[player.uuid]
+        });
+    }
+
+    startTurn(player, io) {
+        const room = player.getRoom();
+        const gameInfo = room.getGameInfo();
+
+        gameInfo.startTurn();
+        const curPlayerId = gameInfo.players[gameInfo.curTurn].id;
+
+        io.to(curPlayerId).emit(SIG.YOUR_TURN, {
+            CODE: CODE.OK
         });
     }
 
