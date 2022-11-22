@@ -68,19 +68,8 @@ class GameManager {
         const code = (room && room.headCount >= 2) ? CODE.OK : CODE.ERROR;
         room && room.startGame();
         this.broadcastHand(player, sig, res, io, code);
+
         this.startTurn(player, io);
-    }
-
-    drawCard(player, res) {
-        const room = player.getRoom();
-        const gameInfo = room.getGameInfo();
-        gameInfo.draw();
-        gameInfo.endTurn();
-
-        res({
-            CODE: CODE.OK,
-            yourHand: gameInfo.hands[player.uuid]
-        });
     }
 
     startTurn(player, io) {
@@ -95,6 +84,18 @@ class GameManager {
         });
     }
 
+    drawCard(player, res) {
+        const room = player.getRoom();
+        const gameInfo = room.getGameInfo();
+        gameInfo.draw();
+        gameInfo.endTurn();
+
+        res({
+            CODE: CODE.OK,
+            yourHand: gameInfo.hands[player.uuid]
+        });
+    }
+
     playCard(player, card, res) {
         const room = player.getRoom();
         const gameInfo = room.getGameInfo();
@@ -102,6 +103,7 @@ class GameManager {
             res({CODE: CODE.ERROR});
         } else {
             gameInfo.playCard(card);
+            gameInfo.endTurn();
             res({CODE: CODE.OK});
         }
     }
