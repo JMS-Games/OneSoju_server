@@ -33,11 +33,15 @@ class SocketManager {
             });
 
             socket.on(SIG.DRAW_CARD, (req, res) => {
-                GM.drawCard(curPlayer, res);
+                GM.drawCard(curPlayer, res).then(() => {
+                    GM.startTurn(curPlayer, this.io);
+                });
             });
 
             socket.on(SIG.USE_CARD, (req, res) => {
-                GM.playCard(curPlayer, req.nextCard, res);
+                GM.playCard(curPlayer, req.nextCard, res).then(() => {
+                    GM.startTurn(curPlayer, this.io);
+                });
             });
 
         });

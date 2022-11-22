@@ -84,7 +84,7 @@ class GameManager {
         });
     }
 
-    drawCard(player, res) {
+    async drawCard(player, res) {
         const room = player.getRoom();
         const gameInfo = room.getGameInfo();
         gameInfo.draw();
@@ -96,16 +96,22 @@ class GameManager {
         });
     }
 
-    playCard(player, card, res) {
+    async playCard(player, card, res) {
         const room = player.getRoom();
         const gameInfo = room.getGameInfo();
-        if (this.checker.isIllegal(gameInfo.curCard, card, gameInfo.hands[player.uuid])) {
+        const isIllegal = this.checker.isIllegal(gameInfo.curCard, card, gameInfo.hands[player.uuid]);
+
+        if (isIllegal) {
             res({CODE: CODE.ERROR});
         } else {
             gameInfo.playCard(card);
             gameInfo.endTurn();
             res({CODE: CODE.OK});
         }
+
+        return new Promise((resolve, reject) => {
+            isIllegal ? reject() : resolve();
+        });
     }
 
     broadcastRoom(curPlayer, sig, res, io) {
