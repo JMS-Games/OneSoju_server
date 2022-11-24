@@ -45,7 +45,7 @@ class GameInfo {
         this.state = STATE.TURN_START;
     }
 
-    playTurn(card) {
+    playTurn(card, wish) {
         this.state = STATE.PLAYING;
 
         switch (card.type) {
@@ -55,7 +55,7 @@ class GameInfo {
             case CONFIG.CARD_TYPE.DEF:
                 this.curAtk = 0; break;
             case CONFIG.CARD_TYPE.ANY:
-                // todo card 7
+                this.curCard.shape = CONFIG.SHAPE[wish.toString()];
                 break;
             case CONFIG.CARD_TYPE.JUMP:
                 this.curTurn += this.direction;
@@ -87,13 +87,13 @@ class GameInfo {
         this.curAtk = 1;
     }
 
-    playCard(card) {
+    playCard(card, wish) {
         this.sideDeque.add(this.curCard);
         this.curCard = card;
 
         const uuid = this.players[this.curTurn].uuid;
         this.hands[uuid] = this.hands[uuid].filter(element => element.id !== card.id);
-        this.playTurn(card);
+        this.playTurn(card, wish);
 
         if (this.hands[uuid].length === 0) {
             // todo remove player from game set

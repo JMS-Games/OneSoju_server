@@ -39,7 +39,7 @@ class SocketManager {
             });
 
             socket.on(SIG.USE_CARD, (req, res) => {
-                GM.playCard(curPlayer, req.nextCard, res).then(() => {
+                GM.playCard(curPlayer, req.nextCard, req.wish, res).then(() => {
                     GM.startTurn(curPlayer, this.io);
                 });
             });
