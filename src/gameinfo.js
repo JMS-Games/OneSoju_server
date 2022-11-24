@@ -75,16 +75,21 @@ class GameInfo {
     }
 
     draw() {
+        const newCards = []
         while (this.curAtk > 0) {
             if (this.deque.getSize() <= 0) {
                 this.deque.add(this.sideDeque).shuffle();
                 this.sideDeque.makeEmpty();
             }
 
-            this.hands[this.players[this.curTurn].uuid].push(this.deque.draw());
+            const newCard = this.deque.draw();
+            newCards.push(newCard);
+
+            this.hands[this.players[this.curTurn].uuid].push(newCard);
             this.curAtk -= 1;
         }
         this.curAtk = 1;
+        return newCards;
     }
 
     playCard(card, wish) {

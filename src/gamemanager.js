@@ -87,11 +87,12 @@ class GameManager {
     async drawCard(player, res) {
         const room = player.getRoom();
         const gameInfo = room.getGameInfo();
-        gameInfo.draw();
+        const drawResult = gameInfo.draw();
         gameInfo.endTurn();
 
         res({
             CODE: CODE.OK,
+            newCards: drawResult,
             yourHand: gameInfo.hands[player.uuid]
         });
     }
