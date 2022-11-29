@@ -9,8 +9,7 @@ const SIG = {
     JOIN_ROOM: 100,
     EXIT_ROOM: 200,
     YOUR_TURN: 300,
-    USE_RESULT: 400,
-    ONE_CARD_RESULT: 500
+    USE_RESULT: 400
 };
 
 Object.freeze(SIG);
