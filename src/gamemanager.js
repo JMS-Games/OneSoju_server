@@ -106,6 +106,9 @@ class GameManager {
             res({CODE: CODE.ERROR});
         } else {
             gameInfo.playCard(card, wish);
+            if (!gameInfo.validPlayers[gameInfo.curTurn]) {
+                // todo winner process
+            }
             gameInfo.endTurn();
             res({CODE: CODE.OK});
             this.broadcastHand(player, SIG.USE_RESULT, res, io, CODE.OK);

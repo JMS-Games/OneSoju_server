@@ -7,6 +7,7 @@ class GameInfo {
     constructor(players) {
         this.headCount = players.length;
         this.players = players;
+        this.validPlayers = [];
         this.hands = {};
         this.initHands();
 
@@ -24,8 +25,9 @@ class GameInfo {
     }
 
     initHands() {
-        this.players.forEach(element => {
+        this.players.forEach((element, index) => {
             this.hands[element.uuid] = [];
+            this.validPlayers[index] = true;
         });
     }
 
@@ -58,20 +60,26 @@ class GameInfo {
                 this.curCard.shape = CONFIG.SHAPE[wish.toString()];
                 break;
             case CONFIG.CARD_TYPE.JUMP:
-                this.curTurn += this.direction;
-                this.curTurn %= this.headCount; break;
+                do {
+                    this.curTurn += this.direction;
+                    this.curTurn %= this.headCount;
+                } while(!this.validPlayers[this.curTurn]); break;
             case CONFIG.CARD_TYPE.BACK:
                 this.direction *= -1; break;
             case CONFIG.CARD_TYPE.REPEAT:
-                this.curTurn -= this.direction;
-                this.curTurn %= this.headCount; break;
+                do {
+                    this.curTurn -= this.direction;
+                    this.curTurn %= this.headCount;
+                } while (!this.validPlayers[this.curTurn]); break;
         }
     }
 
     endTurn() {
         this.state = STATE.TURN_END;
-        this.curTurn += this.direction;
-        this.curTurn %= this.headCount;
+        do {
+            this.curTurn += this.direction;
+            this.curTurn %= this.headCount;
+        } while (!this.validPlayers[this.curTurn]);
     }
 
     draw() {
@@ -101,7 +109,8 @@ class GameInfo {
         this.playTurn(card, wish);
 
         if (this.hands[uuid].length === 0) {
-            // todo remove player from game set
+            this.hands[uuid] = null;
+            this.validPlayers[this.curTurn] = false;
         }
     }
 
