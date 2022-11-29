@@ -111,6 +111,9 @@ class GameInfo {
         if (this.hands[uuid].length === 0) {
             this.hands[uuid] = null;
             this.validPlayers[this.curTurn] = false;
+            if (this.validPlayers.filter(element => true === element).length <= 1) {
+                this.endGame();
+            }
         }
     }
 

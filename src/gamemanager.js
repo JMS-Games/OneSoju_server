@@ -108,6 +108,10 @@ class GameManager {
             gameInfo.playCard(card, wish);
             if (!gameInfo.validPlayers[gameInfo.curTurn]) {
                 // todo winner process
+
+                if (gameInfo.state === STATE.GAME_FINISHED) {
+                    // todo game ending
+                }
             }
             gameInfo.endTurn();
             res({CODE: CODE.OK});
