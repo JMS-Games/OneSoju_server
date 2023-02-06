@@ -111,5 +111,10 @@ describe('Unit Test Sequence', () => {
                 assert.equal(result.CODE, CODE.OK);
             }, io);
         });
+
+        it('get Current Room GameInfo by player2', () => {
+            assert(p2.getRoom().getGameInfo());
+            console.log(p2.getRoom().getGameInfo());
+        });
     });
 });
