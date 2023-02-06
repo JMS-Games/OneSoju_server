@@ -26,6 +26,9 @@ class Room {
             retPlayerId = this.players[1].id;
 
         for (let i = 0; i < this.players.length; i++) {
+            if (this.players[i] === null)
+                continue;
+
             if (this.players[i].uuid === target_player.uuid) {
                 this.gameInfo && (this.gameInfo.headCount -= 1);
                 this.headCount -= 1;
