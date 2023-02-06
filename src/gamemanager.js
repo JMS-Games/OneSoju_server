@@ -29,7 +29,7 @@ class GameManager {
 
         res({
             CODE: CODE.OK,
-            players: player.getRoom().players
+            players: player.getRoom().players.filter((element) => element != null)
         });
 
         this.broadcastRoom(player, SIG.JOIN_ROOM, {
