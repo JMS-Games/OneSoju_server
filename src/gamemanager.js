@@ -53,7 +53,7 @@ class GameManager {
             }
         }
 
-        this.players[this.players.findIndex(element => element.uuid === player.uuid)] = null;
+        this.players[this.players.findIndex(element => !!element && element.uuid === player.uuid)] = null;
         this.broadcastRoom(player, SIG.EXIT_ROOM, {
             CODE: CODE.OK,
             msg: `player ${player.uuid} left the room.`,
@@ -143,7 +143,7 @@ class GameManager {
     }
 
     findPlayerById(id) {
-        return this.players.find(element => element && element.id === id);
+        return this.players.find(element => !!element && element.id === id);
     }
 }
 
