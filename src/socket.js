@@ -19,7 +19,7 @@ class SocketManager {
             let curPlayer = null;
 
             socket.on('disconnect', () => {
-                console.log(`client disconnected from socket id: ${socket.id}, player uuid: ${curPlayer.uuid}`);
+                !!curPlayer && console.log(`client disconnected from socket id: ${socket.id}, player uuid: ${curPlayer.uuid}`);
                 curPlayer && GM.removePlayer(curPlayer, this.io);
             });
 
