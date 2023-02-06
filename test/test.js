@@ -45,25 +45,25 @@ describe('Unit Test Sequence', () => {
         it('Player1 Enter(Create Room)', () => {
             GM.addPlayer(p1, (result) => {
                 assert.equal(result.CODE, CODE.OK);
-            });
+            }, io);
         });
 
         it('Player2 Enter', () => {
             GM.addPlayer(p2, (result) => {
                 assert.equal(result.CODE, CODE.OK);
-            });
+            }, io);
         });
 
         it('Player3 Enter', () => {
             GM.addPlayer(p3, (result) => {
                 assert.equal(result.CODE, CODE.OK);
-            });
+            }, io);
         });
 
         it('Player4 Enter', () => {
             GM.addPlayer(p4, (result) => {
                 assert.equal(result.CODE, CODE.OK);
-            });
+            }, io);
         });
 
         it('Room Count Check expected 1', () => {
@@ -71,23 +71,23 @@ describe('Unit Test Sequence', () => {
         });
 
         it('Room 1 Admin Id expected 0', () => {
-            const p = GM.rooms[0].players.find(element => GM.findPlayerById(element.id).isAdmin);
+            const p = GM.rooms[0].players.find(element => !!element && GM.findPlayerById(element.id).isAdmin);
             assert.equal(p.id, 0);
         });
 
         it('Player1(Admin) Left', () => {
-            GM.removePlayer(p1);
+            GM.removePlayer(p1, io);
         });
 
         it('Room 1 Admin Id expected 1 now', () => {
-            const p = GM.rooms[0].players.find(element => element && GM.findPlayerById(element.id).isAdmin);
+            const p = GM.rooms[0].players.find(element => !!element && GM.findPlayerById(element.id).isAdmin);
             assert.equal(p.id, 1);
         });
 
         it('Player5 Enter', () => {
             GM.addPlayer(p5, (result) => {
                 assert.equal(result.CODE, CODE.OK);
-            });
+            }, io);
         });
 
         it('Room Count Check expected 1 again', () => {
@@ -97,7 +97,7 @@ describe('Unit Test Sequence', () => {
         it('Player6 Enter', () => {
             GM.addPlayer(p6, (result) => {
                 assert.equal(result.CODE, CODE.OK);
-            });
+            }, io);
         });
 
         it('Room Count Check expected 2 now', () => {
@@ -109,7 +109,7 @@ describe('Unit Test Sequence', () => {
         it('Game Start on Room 1 by player2', () => {
             GM.startGame(p2, SIG.START_GAME, (result) => {
                 assert.equal(result.CODE, CODE.OK);
-            }, socketManager.getIo());
+            }, io);
         });
     });
 });
