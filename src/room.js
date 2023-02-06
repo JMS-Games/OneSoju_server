@@ -13,7 +13,7 @@ class Room {
             player.setRoom(this, this.headCount === 0);
 
             this.headCount += 1;
-            this.players.push({id: player.id, uuid: player.uuid});
+            this.players.push({id: player.id, uuid: player.uuid, isAdmin: player.isAdmin});
             return true;
         }
         this.isValid = false;
@@ -21,7 +21,9 @@ class Room {
     }
 
     removePlayer(target_player) {
-        let retPlayerId = this.players[1].id;
+        let retPlayerId = -1;
+        if (this.players.length > 1)
+            retPlayerId = this.players[1].id;
 
         for (let i = 0; i < this.players.length; i++) {
             if (this.players[i].uuid === target_player.uuid) {

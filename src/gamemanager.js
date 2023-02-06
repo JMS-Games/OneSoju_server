@@ -24,7 +24,7 @@ class GameManager {
 
     addPlayer(player, res, io) {
         const isRoom = this.curRoom ? this.curRoom.addPlayer(player) : false;
-        isRoom || this.createRoom() && this.curRoom.addPlayer(player);
+        isRoom || (this.createRoom() && this.curRoom.addPlayer(player));
         this.players.push(player);
 
         res({
@@ -46,7 +46,8 @@ class GameManager {
 
         if (player.isAdmin) {
             const cPlayer = this.findPlayerById(id);
-            cPlayer.isAdmin = true;
+            !!cPlayer && (cPlayer.isAdmin = true);
+            !!cPlayer && (room.players.find(element => !!element && element.id === cPlayer.id).isAdmin = true);
         }
 
         this.players[this.players.findIndex(element => element.uuid === player.uuid)] = null;
@@ -117,14 +118,12 @@ class GameManager {
             res({CODE: CODE.OK});
             this.broadcastHand(player, SIG.USE_RESULT, res, io, CODE.OK);
         }
-
-        isIllegal && throw new Error(CODE.ERROR);
     }
 
     broadcastRoom(curPlayer, sig, res, io) {
         const room = curPlayer.getRoom();
         room.players.forEach(element => {
-            io.to(element.id).emit(sig, res);
+            !!element && io.to(element.id).emit(sig, res);
         });
     }
 
@@ -132,7 +131,7 @@ class GameManager {
         const room = curPlayer.getRoom();
         const gameInfo = room.getGameInfo();
         room.players.forEach(element => {
-            io.to(element.id).emit(sig, res({
+            !!element && io.to(element.id).emit(sig, res({
                 CODE: code,
                 currentCard: gameInfo ? gameInfo.curCard : null,
                 yourHand: gameInfo ? gameInfo.hands[element.uuid] : null
