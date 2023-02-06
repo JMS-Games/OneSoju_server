@@ -105,7 +105,7 @@ describe('Unit Test Sequence', () => {
         });
     });
 
-    describe('Game Starting Sequence Test', () => {
+    describe('Game Starting Sequence Test on 4 players', () => {
         it('Game Start on Room 1 by player2', () => {
             GM.startGame(p2, SIG.START_GAME, (result) => {
                 assert.equal(result.CODE, CODE.OK);

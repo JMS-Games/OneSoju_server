@@ -46,8 +46,11 @@ class GameManager {
 
         if (player.isAdmin) {
             const cPlayer = this.findPlayerById(id);
-            !!cPlayer && (cPlayer.isAdmin = true);
-            !!cPlayer && (room.players.find(element => !!element && element.id === cPlayer.id).isAdmin = true);
+            if (!!cPlayer) {
+                cPlayer.isAdmin = true;
+                const cPlayerInRoom = room.players.find(element => !!element && element.uuid === cPlayer.uuid);
+                !!cPlayerInRoom && (cPlayerInRoom.isAdmin = true);
+            }
         }
 
         this.players[this.players.findIndex(element => element.uuid === player.uuid)] = null;
