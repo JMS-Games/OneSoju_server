@@ -105,12 +105,13 @@ class GameInfo {
         this.curCard = card;
 
         const uuid = this.players[this.curTurn].uuid;
+        const curPlayerIdx = this.curTurn;
         this.hands[uuid] = this.hands[uuid].filter(element => element.id !== card.id);
         this.playTurn(card, wish);
 
         if (this.hands[uuid].length === 0) {
             this.hands[uuid] = null;
-            this.validPlayers[this.curTurn] = false;
+            this.validPlayers[curPlayerIdx] = false;
             if (this.validPlayers.filter(element => true === element).length <= 1) {
                 this.endGame();
             }
