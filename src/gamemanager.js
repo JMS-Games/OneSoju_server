@@ -71,10 +71,11 @@ class GameManager {
     startGame(player, sig, res, io) {
         const room = player.isAdmin ? player.getRoom() : null;
         const code = (room && room.headCount >= 2) ? CODE.OK : CODE.ERROR;
-        room && room.startGame();
-        this.broadcastHand(player, sig, res, io, code);
+        room && room.startGame().then(() => {
+            this.broadcastHand(player, sig, res, io, code);
 
-        this.startTurn(player, io);
+            this.startTurn(player, io);
+        });
     }
 
     startTurn(player, io) {
@@ -82,6 +83,7 @@ class GameManager {
         const gameInfo = room.getGameInfo();
         if (!gameInfo)
             return;
+        console.log("gameInfo", gameInfo);
         gameInfo.startTurn();
         const curPlayerId = gameInfo.players[gameInfo.curTurn].id;
 
