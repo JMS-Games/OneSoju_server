@@ -26,6 +26,7 @@ class SocketManager {
             });
 
             socket.on(SIG.REQUEST_MATCH, (req, res) => {
+                console.log(`new player uuid: ${req.uuid}, socket id: ${socket.id}`);
                 if (CONFIG.MODE === 'development') {
                     curPlayer = new Player(socket.id, this._pid++);
                 } else {
