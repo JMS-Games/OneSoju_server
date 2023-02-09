@@ -83,13 +83,12 @@ class GameManager {
         const gameInfo = room.getGameInfo();
         if (!gameInfo)
             return;
-        console.log("gameInfo", gameInfo);
         gameInfo.startTurn();
-        const curPlayerId = gameInfo.players[gameInfo.curTurn].id;
 
-        io.to(curPlayerId).emit(SIG.YOUR_TURN, {
-            CODE: CODE.OK
-        });
+        this.broadcastRoom(player, SIG.YOUR_TURN, {
+            CODE: CODE.OK,
+            player: player
+        }, io);
     }
 
     async drawCard(player, res) {
