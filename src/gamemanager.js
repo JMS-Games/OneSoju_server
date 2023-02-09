@@ -92,6 +92,13 @@ class GameManager {
     async drawCard(player, res) {
         const room = player.getRoom();
         const gameInfo = room.getGameInfo();
+        console.log(res);
+        if (!gameInfo) {
+            res({
+                CODE: CODE.ERROR
+            });
+            return;
+        }
         const drawResult = gameInfo.draw();
         gameInfo.endTurn();
 
