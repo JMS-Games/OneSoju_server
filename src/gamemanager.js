@@ -130,6 +130,7 @@ class GameManager {
         const gameInfo = room.getGameInfo();
         room.players.forEach(element => {
             !!element && io.to(element.id).emit(sig, {
+                ...res,
                 CODE: code,
                 currentCard: gameInfo ? gameInfo.curCard : null,
                 yourHand: gameInfo ? gameInfo.hands[element.uuid] : null
