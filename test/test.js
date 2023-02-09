@@ -40,6 +40,7 @@ describe('Unit Test Sequence', () => {
     const p4 = new Player(3, 3);
     const p5 = new Player(4, 4);
     const p6 = new Player(5, 5);
+    const p7 = new Player(6, 6);
 
     describe('Create Room Sequence Test', () => {
         it('Player1 Enter(Create Room)', () => {
@@ -115,6 +116,26 @@ describe('Unit Test Sequence', () => {
         it('get Current Room GameInfo by player2', () => {
             assert(p2.getRoom().getGameInfo());
             console.log(p2.getRoom().getGameInfo());
+        });
+    });
+
+    describe('Game Starting Sequence Test on 2 players', () => {
+        it('Player7 Enter(in Room2(Admin = p6))', () => {
+            GM.addPlayer(p7, (result) => {
+                assert.equal(result.CODE, CODE.OK);
+            }, io);
+        });
+
+        it('player7 try to start the game = fail', () => {
+            GM.startGame(p7, SIG.START_GAME, (result) => {
+                assert.equal(result.CODE, CODE.ERROR);
+            }, io);
+        });
+
+        it('player6 try to start the game = success', () => {
+            GM.startGame(p6, SIG.START_GAME, (result) => {
+                assert.equal(result.CODE, CODE.OK);
+            }, io);
         });
     });
 });
