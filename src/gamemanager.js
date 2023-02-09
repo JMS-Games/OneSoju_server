@@ -73,11 +73,14 @@ class GameManager {
         const code = (room && room.headCount >= 2) ? CODE.OK : CODE.ERROR;
         res({CODE: code});
 
-        code === CODE.OK && room.startGame(function () {
+        if (code === CODE.ERROR)
+            return;
+
+        room.startGame(() => {
             this.broadcastHand(player, sig, res, io, code);
 
             this.startTurn(player, io);
-        }.bind(this));
+        });
     }
 
     startTurn(player, io) {
