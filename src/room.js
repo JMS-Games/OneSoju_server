@@ -49,7 +49,7 @@ class Room {
         return this.gameInfo;
     }
 
-    startGame() {
+    async startGame() {
         this.players = this.players.filter((element) => element != null);
         this.isValid = false;
 
