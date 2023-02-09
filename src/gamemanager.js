@@ -110,16 +110,10 @@ class GameManager {
             res({CODE: CODE.ERROR});
         } else {
             gameInfo.playCard(card, wish);
-            if (!gameInfo.validPlayers[gameInfo.curTurn]) {
-                // todo winner process
-
-                if (gameInfo.state === STATE.GAME_FINISHED) {
-                    // todo game ending
-                }
-            }
             gameInfo.endTurn();
             res({CODE: CODE.OK});
             this.broadcastHand(player, SIG.USE_RESULT, res, io, CODE.OK);
+            this.checkWin(gameInfo, player, io);
         }
     }
 
@@ -144,6 +138,20 @@ class GameManager {
 
     findPlayerById(id) {
         return this.players.find(element => !!element && element.id === id);
+    }
+
+    checkWin(gameInfo, curPlayer, io) {
+        if (!gameInfo.validPlayers[gameInfo.curTurn]) {
+            this.broadcastRoom(curPlayer, SIG.SOMEONE_WIN, {
+                CODE: CODE.OK,
+                winPlayer: curPlayer.uuid
+            }, io);
+            if (gameInfo.state === STATE.GAME_FINISHED) {
+                this.broadcastRoom(curPlayer, SIG.END_GAME, {
+                    CODE: CODE.OK
+                }, io);
+            }
+        }
     }
 }
 
