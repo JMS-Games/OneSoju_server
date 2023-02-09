@@ -129,11 +129,11 @@ class GameManager {
         const room = curPlayer.getRoom();
         const gameInfo = room.getGameInfo();
         room.players.forEach(element => {
-            !!element && io.to(element.id).emit(sig, res({
+            !!element && io.to(element.id).emit(sig, {
                 CODE: code,
                 currentCard: gameInfo ? gameInfo.curCard : null,
                 yourHand: gameInfo ? gameInfo.hands[element.uuid] : null
-            }));
+            });
         });
     }
 
