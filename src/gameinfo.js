@@ -31,7 +31,7 @@ class GameInfo {
         });
     }
 
-    gamePrepareSeq() {
+    gamePrepareSeq(cb) {
         this.state = STATE.PREPARING;
         this.curCard = this.deque.draw();
         this.sideDeque.add(this.curCard);
@@ -41,6 +41,7 @@ class GameInfo {
                 this.hands[element.uuid].push(this.deque.draw());
             });
         }
+        cb && cb();
     }
 
     startTurn() {

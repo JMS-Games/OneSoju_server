@@ -71,11 +71,11 @@ class GameManager {
     startGame(player, sig, res, io) {
         const room = player.isAdmin ? player.getRoom() : null;
         const code = (room && room.headCount >= 2) ? CODE.OK : CODE.ERROR;
-        room && room.startGame().then(() => {
+        room && room.startGame(function () {
             this.broadcastHand(player, sig, res, io, code);
 
             this.startTurn(player, io);
-        });
+        }.bind(this));
     }
 
     startTurn(player, io) {

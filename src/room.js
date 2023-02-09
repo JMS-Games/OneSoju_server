@@ -49,12 +49,12 @@ class Room {
         return this.gameInfo;
     }
 
-    async startGame() {
+    startGame(cb) {
         this.players = this.players.filter((element) => element != null);
         this.isValid = false;
 
         this.gameInfo = new GameInfo(this.players);
-        this.gameInfo.gamePrepareSeq();
+        this.gameInfo.gamePrepareSeq(cb);
     }
 }
 
