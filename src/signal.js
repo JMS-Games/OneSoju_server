@@ -10,7 +10,8 @@ const SIG = {
     EXIT_ROOM: "200",
     YOUR_TURN: "300",
     USE_RESULT: "400",
-    SOMEONE_WIN: "500"
+    SOMEONE_WIN: "500",
+    END_GAME: "600"
 };
 
 Object.freeze(SIG);
