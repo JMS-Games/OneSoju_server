@@ -9,6 +9,9 @@ const CONFIG = require('./src/config');
 
 server.listen(CONFIG.PORT, () => {
     console.log(`server is listening on ${CONFIG.PORT}`);
+    process.argv.forEach((val, index) => {
+        console.log(`${index}, ${val}`);
+    });
 });
 
 socketManager.boot();
