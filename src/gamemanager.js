@@ -91,7 +91,7 @@ class GameManager {
         }, io);
     }
 
-    async drawCard(player, res) {
+    drawCard(player, res, io) {
         const room = player.getRoom();
         const gameInfo = room.getGameInfo();
         if (!gameInfo) {
@@ -108,6 +108,8 @@ class GameManager {
             newCards: drawResult,
             yourHand: gameInfo.hands[player.uuid]
         });
+
+        this.startTurn(player, io);
     }
 
     playCard(player, card, wish, res, io) {
