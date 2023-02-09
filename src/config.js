@@ -1,5 +1,6 @@
 const CONFIG = {
     PORT: 3000,
+    MODE: "development",
     START_HAND: {
         2: 14,
         3: 9,
