@@ -22,7 +22,7 @@ class Room {
 
     removePlayer(target_player) {
         let retPlayerId = -1;
-        if (this.players.length > 1)
+        if (this.players.length > 1 && this.players[1].id)
             retPlayerId = this.players[1].id;
 
         for (let i = 0; i < this.players.length; i++) {
