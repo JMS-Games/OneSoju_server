@@ -1,4 +1,5 @@
 const SIG = require('./signal');
+const CONFIG = require('./config');
 const CODE = require('./code');
 
 const Player = require('./player');
@@ -8,6 +9,7 @@ const GM = new GameManager();
 class SocketManager {
     constructor(io) {
         this.io = io;
+        this._pid = 0;
     }
 
     getIo() {
@@ -24,7 +26,11 @@ class SocketManager {
             });
 
             socket.on(SIG.REQUEST_MATCH, (req, res) => {
-                curPlayer = new Player(socket.id, req.uuid);
+                if (CONFIG.MODE === 'development') {
+                    curPlayer = new Player(socket.id, this._pid++);
+                } else {
+                    curPlayer = new Player(socket.id, req.uuid);
+                }
                 GM.addPlayer(curPlayer, res, this.io);
             });
 
