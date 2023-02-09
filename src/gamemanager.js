@@ -71,6 +71,8 @@ class GameManager {
     startGame(player, sig, res, io) {
         const room = player.isAdmin ? player.getRoom() : null;
         const code = (room && room.headCount >= 2) ? CODE.OK : CODE.ERROR;
+        res({CODE: code});
+
         room && room.startGame(function () {
             this.broadcastHand(player, sig, res, io, code);
 
