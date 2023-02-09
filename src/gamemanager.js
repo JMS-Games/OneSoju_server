@@ -110,7 +110,7 @@ class GameManager {
         });
     }
 
-    async playCard(player, card, wish, res, io) {
+    playCard(player, card, wish, res, io) {
         const room = player.getRoom();
         const gameInfo = room.getGameInfo();
         const isIllegal = this.checker.isIllegal(gameInfo.curCard, card, gameInfo.hands[player.uuid]);
@@ -119,11 +119,12 @@ class GameManager {
             res({CODE: CODE.ERROR});
         } else {
             gameInfo.playCard(card, wish);
-            gameInfo.endTurn();
             res({CODE: CODE.OK});
             this.broadcastHand(player, SIG.USE_RESULT, res, io, CODE.OK);
             this.checkWin(gameInfo, player, io);
         }
+
+        this.startTurn(player, io);
     }
 
     broadcastRoom(curPlayer, sig, res, io) {

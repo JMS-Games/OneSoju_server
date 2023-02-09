@@ -116,6 +116,8 @@ class GameInfo {
                 this.endGame();
             }
         }
+
+        this.endTurn();
     }
 
     endGame() {
