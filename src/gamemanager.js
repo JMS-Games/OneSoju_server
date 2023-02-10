@@ -4,10 +4,21 @@ const SIG = require('./signal');
 const Checker = require('./checker');
 const Room = require('./room');
 
+class IDManager {
+    constructor() {
+        this.roomId = (0 | Math.random() * 998);
+    }
+
+    getNewRoomID() {
+        return this.roomId++;
+    }
+}
+const IDM = new IDManager();
+
 class GameManager {
     constructor() {
         this.curRoom = null;
-        this.rooms = [];
+        this.rooms = {};
         this.players = [];
         this.checker = new Checker();
     }
@@ -16,8 +27,9 @@ class GameManager {
         if (this.curRoom && this.curRoom.getIsValid()) {
             return false;
         }
-        const tmpRoom = new Room();
-        this.rooms.push(tmpRoom);
+        const roomID = IDM.getNewRoomID();
+        const tmpRoom = new Room(roomID);
+        this.rooms[roomID] = tmpRoom;
         this.curRoom = tmpRoom;
         return true;
     }
@@ -29,7 +41,7 @@ class GameManager {
 
         res({
             CODE: CODE.OK,
-            players: player.getRoom().players.filter((element) => element != null),
+            players: this.rooms[player.getRoom()].players.filter((element) => element != null),
             myInfo: player
         });
 
@@ -41,7 +53,7 @@ class GameManager {
     }
 
     removePlayer(player, io) {
-        const room = player.getRoom();
+        const room = this.rooms[player.getRoom()];
         const gameInfo = room.getGameInfo();
         const id = room.removePlayer(player);
 
@@ -69,7 +81,7 @@ class GameManager {
     }
 
     startGame(player, sig, res, io) {
-        const room = player.isAdmin ? player.getRoom() : null;
+        const room = player.isAdmin ? this.rooms[player.getRoom()] : null;
         const code = (room && room.headCount >= 2) ? CODE.OK : CODE.ERROR;
         res({CODE: code});
 
@@ -85,7 +97,7 @@ class GameManager {
     }
 
     startTurn(player, io) {
-        const room = player.getRoom();
+        const room = this.rooms[player.getRoom()];
         const gameInfo = room.getGameInfo();
         if (!gameInfo)
             return;
@@ -98,7 +110,7 @@ class GameManager {
     }
 
     drawCard(player, res, io) {
-        const room = player.getRoom();
+        const room = this.rooms[player.getRoom()];
         const gameInfo = room.getGameInfo();
         if (!gameInfo) {
             res({
@@ -119,7 +131,7 @@ class GameManager {
     }
 
     playCard(player, card, wish, res, io) {
-        const room = player.getRoom();
+        const room = this.rooms[player.getRoom()];
         const gameInfo = room.getGameInfo();
         const isIllegal = this.checker.isIllegal(gameInfo.curCard, card, gameInfo.hands[player.uuid]);
 
@@ -136,14 +148,14 @@ class GameManager {
     }
 
     broadcastRoom(curPlayer, sig, res, io) {
-        const room = curPlayer.getRoom();
+        const room = this.rooms[curPlayer.getRoom()];
         room.players.forEach(element => {
             !!element && io.to(element.id).emit(sig, res);
         });
     }
 
     broadcastHand(curPlayer, sig, io, code) {
-        const room = curPlayer.getRoom();
+        const room = this.rooms[curPlayer.getRoom()];
         const gameInfo = room.getGameInfo();
         room.players.forEach(element => {
             !!element && io.to(element.id).emit(sig, {

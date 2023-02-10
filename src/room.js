@@ -1,7 +1,8 @@
 const GameInfo = require('./gameinfo');
 
 class Room {
-    constructor() {
+    constructor(id) {
+        this.id = id;
         this.players = [];
         this.headCount = 0;
         this.isValid = true;
@@ -10,17 +11,10 @@ class Room {
 
     addPlayer(player) {
         if (this.headCount < 4) {
-            player.setRoom(this, this.headCount === 0);
+            player.setRoom(this.id, this.headCount === 0);
 
             this.headCount += 1;
-            this.players.push({
-                id: player.id,
-                uuid: player.uuid,
-                isAdmin: player.isAdmin,
-                hand: player.hand,
-                leftHand: player.leftHand,
-                rank: player.rank
-            });
+            this.players.push(player);
             return true;
         }
         this.isValid = false;

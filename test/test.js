@@ -68,11 +68,11 @@ describe('Unit Test Sequence', () => {
         });
 
         it('Room Count Check expected 1', () => {
-            assert.equal(GM.rooms.length, 1);
+            assert.equal(Object.keys(GM.rooms).length, 1);
         });
 
         it('Room 1 Admin Id expected 0', () => {
-            const p = GM.rooms[0].players.find(element => !!element && GM.findPlayerById(element.id).isAdmin);
+            const p = GM.rooms[p1.getRoom()].players.find(element => !!element && GM.findPlayerById(element.id).isAdmin);
             assert.equal(p.id, 0);
         });
 
@@ -81,7 +81,7 @@ describe('Unit Test Sequence', () => {
         });
 
         it('Room 1 Admin Id expected 1 now', () => {
-            const p = GM.rooms[0].players.find(element => !!element && GM.findPlayerById(element.id).isAdmin);
+            const p = GM.rooms[p2.getRoom()].players.find(element => !!element && GM.findPlayerById(element.id).isAdmin);
             assert.equal(p.id, 1);
         });
 
@@ -92,7 +92,7 @@ describe('Unit Test Sequence', () => {
         });
 
         it('Room Count Check expected 1 again', () => {
-            assert.equal(GM.rooms.length, 1);
+            assert.equal(Object.keys(GM.rooms).length, 1);
         });
 
         it('Player6 Enter', () => {
@@ -102,7 +102,7 @@ describe('Unit Test Sequence', () => {
         });
 
         it('Room Count Check expected 2 now', () => {
-            assert.equal(GM.rooms.length, 2);
+            assert.equal(Object.keys(GM.rooms).length, 2);
         });
     });
 
@@ -114,8 +114,8 @@ describe('Unit Test Sequence', () => {
         });
 
         it('get Current Room GameInfo by player2', () => {
-            assert(p2.getRoom().getGameInfo());
-            console.log(p2.getRoom().getGameInfo());
+            assert(GM.rooms[p2.getRoom()].getGameInfo());
+            console.log(GM.rooms[p2.getRoom()].getGameInfo());
         });
     });
 
