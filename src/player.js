@@ -7,6 +7,7 @@ class Player {
         this.hand = [];
         this.leftHand = 0;
         this.rank = -1;
+        this.onPlaying = false;
     }
 
     setRoom(room, isFirst) {
@@ -21,6 +22,14 @@ class Player {
     refreshHand(hand) {
         this.hand = hand;
         this.leftHand = hand.length;
+    }
+
+    setPlaying(bool) {
+        this.onPlaying = bool;
+    }
+
+    isPlaying() {
+        return this.onPlaying;
     }
 }
 
