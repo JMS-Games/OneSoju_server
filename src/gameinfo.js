@@ -11,6 +11,7 @@ class GameInfo {
             player.setPlaying(true);
         });
 
+        this.remainRank = 1;
         this.curTurn = 0;
         this.direction = CONFIG.DIRECTION.CLOCKWISE;
         this.curCard = null;
@@ -104,7 +105,8 @@ class GameInfo {
 
         if (this.players[this.curTurn].leftHand === 0) {
             this.players[this.curTurn].setPlaying(false);
-            if (this.players.filter(element => true === element.isPlaying()).length <= 1) {
+            this.players[this.curTurn].rank = this.remainRank++;
+            if (this.remainRank === 4) {
                 this.endGame();
             }
         }
