@@ -13,7 +13,14 @@ class Room {
             player.setRoom(this, this.headCount === 0);
 
             this.headCount += 1;
-            this.players.push({id: player.id, uuid: player.uuid, isAdmin: player.isAdmin});
+            this.players.push({
+                id: player.id,
+                uuid: player.uuid,
+                isAdmin: player.isAdmin,
+                hand: player.hand,
+                leftHand: player.leftHand,
+                rank: player.rank
+            });
             return true;
         }
         this.isValid = false;

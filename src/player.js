@@ -4,6 +4,9 @@ class Player {
         this.uuid = uuid;
         this.room = null;
         this.isAdmin = false;
+        this.hand = [];
+        this.leftHand = 0;
+        this.rank = -1;
     }
 
     setRoom(room, isFirst) {
@@ -13,6 +16,11 @@ class Player {
 
     getRoom() {
         return this.room;
+    }
+
+    refreshHand(hand) {
+        this.hand = hand;
+        this.leftHand = hand.length;
     }
 }
 
