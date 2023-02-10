@@ -2,6 +2,7 @@ const CODE = require('./code');
 const STATE = require('./state');
 const SIG = require('./signal');
 const Checker = require('./checker');
+const checker = new Checker();
 const Room = require('./room');
 
 class IDManager {
@@ -20,7 +21,6 @@ class GameManager {
         this.curRoom = null;
         this.rooms = {};
         this.players = [];
-        this.checker = new Checker();
     }
 
     createRoom() {
@@ -133,7 +133,7 @@ class GameManager {
     playCard(player, card, wish, res, io) {
         const room = this.rooms[player.getRoom()];
         const gameInfo = room.getGameInfo();
-        const isIllegal = this.checker.isIllegal(gameInfo.curCard, card, gameInfo.hands[player.uuid]);
+        const isIllegal = checker.isIllegal(gameInfo.curCard, card, gameInfo.hands[player.uuid]);
 
         if (isIllegal) {
             res({CODE: CODE.ERROR});
