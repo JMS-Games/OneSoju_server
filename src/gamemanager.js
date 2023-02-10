@@ -7,7 +7,7 @@ const Room = require('./room');
 
 class IDManager {
     constructor() {
-        this.roomId = (0 | Math.random() * 998);
+        this.roomId = (0 | (Math.random() * 998));
     }
 
     getNewRoomID() {

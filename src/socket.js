@@ -9,7 +9,7 @@ const GM = new GameManager();
 class SocketManager {
     constructor(io) {
         this.io = io;
-        this._pid = (0 | Math.random() * 998);
+        this._pid = (0 | (Math.random() * 998));
     }
 
     getIo() {
