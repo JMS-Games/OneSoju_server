@@ -19,6 +19,11 @@ class Player {
         return this.roomID;
     }
 
+    addHand(card) {
+        this.hand.push(card);
+        this.leftHand += 1;
+    }
+
     refreshHand(hand) {
         this.hand = hand;
         this.leftHand = hand.length;

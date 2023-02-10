@@ -77,7 +77,7 @@ class GameManager {
             return;
         }
 
-        gameInfo && gameInfo.sideDeque.add(gameInfo.hands[player.uuid]);
+        gameInfo && gameInfo.sideDeque.add(player.hand);
     }
 
     startGame(player, sig, res, io) {
@@ -124,7 +124,7 @@ class GameManager {
         res({
             CODE: CODE.OK,
             newCards: drawResult,
-            yourHand: gameInfo.hands[player.uuid]
+            yourHand: player.hand
         });
 
         this.startTurn(player, io);
@@ -133,7 +133,7 @@ class GameManager {
     playCard(player, card, wish, res, io) {
         const room = this.rooms[player.getRoom()];
         const gameInfo = room.getGameInfo();
-        const isIllegal = checker.isIllegal(gameInfo.curCard, card, gameInfo.hands[player.uuid]);
+        const isIllegal = checker.isIllegal(gameInfo.curCard, card, player.hand);
 
         if (isIllegal) {
             res({CODE: CODE.ERROR});
@@ -161,7 +161,7 @@ class GameManager {
             !!element && io.to(element.id).emit(sig, {
                 CODE: code,
                 currentCard: gameInfo ? gameInfo.curCard : null,
-                yourHand: gameInfo ? gameInfo.hands[element.uuid] : null
+                yourHand: curPlayer.hand
             });
         });
     }
@@ -171,7 +171,7 @@ class GameManager {
     }
 
     checkWin(gameInfo, curPlayer, io) {
-        if (!gameInfo.validPlayers[gameInfo.curTurn]) {
+        if (!curPlayer.isPlaying()) {
             this.broadcastRoom(curPlayer, SIG.SOMEONE_WIN, {
                 CODE: CODE.OK,
                 player: curPlayer
