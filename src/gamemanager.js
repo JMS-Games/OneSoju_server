@@ -81,6 +81,7 @@ class GameManager {
 
             this.startTurn(player, io);
         });
+        this.players = this.players.filter((element) => element != null);
     }
 
     startTurn(player, io) {
