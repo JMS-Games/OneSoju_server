@@ -29,7 +29,6 @@ class Room {
                 continue;
 
             if (this.players[i].uuid === target_player.uuid) {
-                this.gameInfo && (this.gameInfo.headCount -= 1);
                 this.headCount -= 1;
                 this.players[i] = null;
             }
