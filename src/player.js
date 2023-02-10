@@ -2,7 +2,7 @@ class Player {
     constructor(id, uuid) {
         this.id = id;
         this.uuid = uuid;
-        this.room = null;
+        this.roomID = null;
         this.isAdmin = false;
         this.hand = [];
         this.leftHand = 0;
@@ -10,12 +10,12 @@ class Player {
     }
 
     setRoom(room, isFirst) {
-        this.room = room;
+        this.roomID = room;
         this.isAdmin = isFirst;
     }
 
     getRoom() {
-        return this.room;
+        return this.roomID;
     }
 
     refreshHand(hand) {
