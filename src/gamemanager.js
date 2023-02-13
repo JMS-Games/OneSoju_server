@@ -65,11 +65,11 @@ class GameManager {
             player: player
         }, io);
 
-        if (gameInfo && (gameInfo.state === STATE.BEFORE_START || gameInfo.state === STATE.GAME_FINISHED)) {
+        if (!gameInfo)
             return;
-        }
 
-        gameInfo && gameInfo.sideDeque.add(player.hand);
+        gameInfo.sideDeque.add(player.hand);
+        player.setPlaying(false);
     }
 
     startGame(player, sig, res, io) {
