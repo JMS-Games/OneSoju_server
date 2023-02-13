@@ -153,7 +153,7 @@ class GameManager {
         room.players.forEach(player => {
             !!player && io.to(player.id).emit(sig, {
                 CODE: code,
-                candidateCards: [],
+                candidateCards: checker.getCandidateCards(player, room),
                 yourHand: player.hand
             });
         });

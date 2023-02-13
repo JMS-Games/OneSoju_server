@@ -34,6 +34,14 @@ class Checker {
         // not match with shape or number
         return !(curCard.shape === nextCard.shape || curCard.value === nextCard.value);
     }
+
+    getCandidateCards(player, room) {
+        const gameInfo = room.getGameInfo();
+        if (!gameInfo)
+            return;
+        const curCard = gameInfo.curCard;
+        return player.hand.filter((card) => !this.isIllegal(curCard, card, player.hand));
+    }
 }
 
 module.exports = Checker;
