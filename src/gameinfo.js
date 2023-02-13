@@ -116,7 +116,7 @@ class GameInfo {
         if (this.curPlayer.leftHand === 0) {
             this.curPlayer.setPlaying(false);
             this.curPlayer.setRank(this.remainRank++);
-            if (this.remainRank === 4) {
+            if (this.remainRank === this.headCount) {
                 this.endGame();
             }
         }
