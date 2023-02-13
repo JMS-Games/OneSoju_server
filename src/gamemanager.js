@@ -134,9 +134,8 @@ class GameManager {
             res({CODE: CODE.OK});
             this.broadcastHand(player, SIG.USE_RESULT, io, CODE.OK);
             this.checkWin(gameInfo, player, io);
+            this.startTurn(player, io);
         }
-
-        this.startTurn(player, io);
     }
 
     broadcastRoom(curPlayer, sig, res, io) {
