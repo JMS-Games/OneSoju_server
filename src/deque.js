@@ -8,8 +8,8 @@ class Deque {
     }
 
     init() {
-        for (let i=0; i < 52; i++) {
-            this.queue.push(new Card(i, i % 14, (i / 14).toFixed()))
+        for (let i = 0; i < 52; i++) {
+            this.queue.push(new Card(i, (i % 13) + 1, ((i / 13) | 0)));
         }
         // push JOKER
         this.queue.push(new Card(52, 14, 0));
