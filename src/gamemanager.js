@@ -97,6 +97,7 @@ class GameManager {
 
         this.broadcastRoom(player, SIG.YOUR_TURN, {
             CODE: CODE.OK,
+            currentCard: gameInfo.curCard,
             player: player
         }, io);
     }
@@ -147,11 +148,9 @@ class GameManager {
 
     broadcastHand(curPlayer, sig, io, code) {
         const room = this.rooms[curPlayer.getRoom()];
-        const gameInfo = room.getGameInfo();
         room.players.forEach(element => {
             !!element && io.to(element.id).emit(sig, {
                 CODE: code,
-                currentCard: gameInfo ? gameInfo.curCard : null,
                 yourHand: curPlayer.hand
             });
         });
