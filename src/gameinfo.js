@@ -28,12 +28,14 @@ class GameInfo {
 
     gamePrepareSeq(cb) {
         this.state = STATE.PREPARING;
-        this.curCard = this.deque.draw();
-        this.sideDeque.add(this.curCard);
+        const tmpCard = this.deque.draw();
+        this.curCard = tmpCard;
+        this.sideDeque.add(tmpCard);
 
         for (let i = 0; i < CONFIG.START_HAND[this.headCount]; i++) {
             this.players.forEach(player => {
-                player.addHand(this.deque.draw());
+                const drawCard = this.deque.draw();
+                player.addHand(drawCard);
             });
         }
         cb && cb();
@@ -104,7 +106,7 @@ class GameInfo {
     }
 
     playCard(card, wish) {
-        this.sideDeque.add(this.curCard);
+        this.sideDeque.add(card);
         this.curCard = card;
 
         const newHand = this.curPlayer.hand.filter(element => element.id !== card.id);
