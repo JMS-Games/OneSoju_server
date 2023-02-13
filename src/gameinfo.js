@@ -67,14 +67,14 @@ class GameInfo {
             case CONFIG.CARD_TYPE.JUMP:
                 do {
                     this.curTurn += this.direction;
-                    this.curTurn %= this.headCount;
+                    this.curTurn = ((this.curTurn % this.headCount) + this.headCount) % this.headCount;
                 } while(!this.curPlayer.isPlaying()); break;
             case CONFIG.CARD_TYPE.BACK:
                 this.direction *= -1; break;
             case CONFIG.CARD_TYPE.REPEAT:
                 do {
                     this.curTurn -= this.direction;
-                    this.curTurn %= this.headCount;
+                    this.curTurn = ((this.curTurn % this.headCount) + this.headCount) % this.headCount;
                 } while (!this.curPlayer.isPlaying()); break;
         }
     }
@@ -83,7 +83,7 @@ class GameInfo {
         this.state = STATE.TURN_END;
         do {
             this.curTurn += this.direction;
-            this.curTurn %= this.headCount;
+            this.curTurn = ((this.curTurn % this.headCount) + this.headCount) % this.headCount;
         } while (!this.curPlayer.isPlaying());
     }
 
