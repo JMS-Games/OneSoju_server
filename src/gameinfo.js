@@ -40,6 +40,12 @@ class GameInfo {
 
     startTurn() {
         this.state = STATE.TURN_START;
+        this.players.forEach((player, index) => {
+            if (index === this.curTurn)
+                player.setTurn(true);
+            else
+                player.setTurn(false);
+        });
     }
 
     playTurn(card, wish) {

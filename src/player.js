@@ -8,6 +8,7 @@ class Player {
         this.leftHand = 0;
         this.rank = -1;
         this.onPlaying = false;
+        this.isTurn = false;
     }
 
     setRoom(room, isFirst) {
@@ -39,6 +40,10 @@ class Player {
 
     setRank(rank) {
         this.rank = rank;
+    }
+
+    setTurn(isTurn) {
+        this.isTurn = isTurn;
     }
 }
 
