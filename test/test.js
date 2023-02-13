@@ -117,6 +117,17 @@ describe('Unit Test Sequence', () => {
             assert(GM.rooms[p2.getRoom()].getGameInfo());
             console.log(GM.rooms[p2.getRoom()].getGameInfo());
         });
+
+        it('player2 draw card.', () => {
+            GM.drawCard(p2, (result) => {
+                assert.equal(result.CODE, CODE.OK);
+                console.log("newCard!:", result.newCards);
+            }, io);
+        });
+
+        it(`now player2's isTurn is false and player3's isTurn is true`, () => {
+           assert.equal(!p2.isTurn && p3.isTurn, true);
+        });
     });
 
     describe('Game Starting Sequence Test on 2 players', () => {
