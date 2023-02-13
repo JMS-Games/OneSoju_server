@@ -35,7 +35,7 @@ class GameManager {
     }
 
     addPlayer(player, res, io) {
-        const isRoom = this.curRoom ? this.curRoom.addPlayer(player) : false;
+        const isRoom = (this.curRoom && this.curRoom.isValid) ? this.curRoom.addPlayer(player) : false;
         isRoom || (this.createRoom() && this.curRoom.addPlayer(player));
         this.players.push(player);
 
