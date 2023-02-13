@@ -13,6 +13,7 @@ class GameInfo {
 
         this.remainRank = 1;
         this.curTurn = 0;
+        this.curPlayer = null;
         this.direction = CONFIG.DIRECTION.CLOCKWISE;
         this.curCard = null;
         this.state = STATE.BEFORE_START;
@@ -46,6 +47,7 @@ class GameInfo {
             else
                 player.setTurn(false);
         });
+        this.curPlayer = this.players[this.curTurn];
     }
 
     playTurn(card, wish) {
@@ -64,14 +66,14 @@ class GameInfo {
                 do {
                     this.curTurn += this.direction;
                     this.curTurn %= this.headCount;
-                } while(!this.players[this.curTurn].isPlaying()); break;
+                } while(!this.curPlayer.isPlaying()); break;
             case CONFIG.CARD_TYPE.BACK:
                 this.direction *= -1; break;
             case CONFIG.CARD_TYPE.REPEAT:
                 do {
                     this.curTurn -= this.direction;
                     this.curTurn %= this.headCount;
-                } while (!this.players[this.curTurn].isPlaying()); break;
+                } while (!this.curPlayer.isPlaying()); break;
         }
     }
 
@@ -80,7 +82,7 @@ class GameInfo {
         do {
             this.curTurn += this.direction;
             this.curTurn %= this.headCount;
-        } while (!this.players[this.curTurn].isPlaying());
+        } while (!this.curPlayer.isPlaying());
     }
 
     draw() {
@@ -94,7 +96,7 @@ class GameInfo {
             const newCard = this.deque.draw();
             newCards.push(newCard);
 
-            this.players[this.curTurn].addHand(newCard);
+            this.curPlayer.addHand(newCard);
             this.curAtk -= 1;
         }
         this.curAtk = 1;
@@ -105,13 +107,13 @@ class GameInfo {
         this.sideDeque.add(this.curCard);
         this.curCard = card;
 
-        const newHand = this.players[this.curTurn].hand.filter(element => element.id !== card.id);
-        this.players[this.curTurn].refreshHand(newHand);
+        const newHand = this.curPlayer.hand.filter(element => element.id !== card.id);
+        this.curPlayer.refreshHand(newHand);
         this.playTurn(card, wish);
 
-        if (this.players[this.curTurn].leftHand === 0) {
-            this.players[this.curTurn].setPlaying(false);
-            this.players[this.curTurn].setRank(this.remainRank++);
+        if (this.curPlayer.leftHand === 0) {
+            this.curPlayer.setPlaying(false);
+            this.curPlayer.setRank(this.remainRank++);
             if (this.remainRank === 4) {
                 this.endGame();
             }
