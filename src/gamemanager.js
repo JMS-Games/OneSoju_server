@@ -55,18 +55,10 @@ class GameManager {
     removePlayer(player, io) {
         const room = this.rooms[player.getRoom()];
         const gameInfo = room.getGameInfo();
-        const id = room.removePlayer(player);
 
-        if (player.isAdmin) {
-            const cPlayer = this.findPlayerById(id);
-            if (!!cPlayer) {
-                cPlayer.isAdmin = true;
-                const cPlayerInRoom = room.players.find(element => !!element && element.uuid === cPlayer.uuid);
-                !!cPlayerInRoom && (cPlayerInRoom.isAdmin = true);
-            }
-        }
-
+        room.removePlayer(player);
         this.players[this.players.findIndex(element => !!element && element.uuid === player.uuid)] = null;
+
         this.broadcastRoom(player, SIG.EXIT_ROOM, {
             CODE: CODE.OK,
             msg: `player ${player.uuid} left the room.`,

@@ -22,7 +22,7 @@ class Room {
     }
 
     removePlayer(target_player) {
-        let retPlayerId = -1;
+        let cPlayer = null;
 
         for (let i = 0; i < this.players.length; i++) {
             if (this.players[i] === null)
@@ -31,12 +31,11 @@ class Room {
             if (this.players[i].uuid === target_player.uuid) {
                 this.headCount -= 1;
                 this.players[i] = null;
+            } else if (!cPlayer) {
+                cPlayer = this.players[i];
             }
-            else if (retPlayerId === -1)
-                retPlayerId = this.players[i].id;
         }
-
-        return retPlayerId;
+        cPlayer && (cPlayer.isAdmin = true);
     }
 
     getIsValid() {
