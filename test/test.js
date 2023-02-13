@@ -125,6 +125,10 @@ describe('Unit Test Sequence', () => {
         it(`now player2's isTurn is false and player3's isTurn is true`, () => {
            assert.equal(!p2.isTurn && p3.isTurn, true);
         });
+
+        it(`player2's hand info`, () => {
+           console.log(p2.hand);
+        });
     });
 
     describe('Game Starting Sequence Test on 2 players', () => {
