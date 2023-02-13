@@ -105,7 +105,7 @@ class GameInfo {
 
         if (this.players[this.curTurn].leftHand === 0) {
             this.players[this.curTurn].setPlaying(false);
-            this.players[this.curTurn].rank = this.remainRank++;
+            this.players[this.curTurn].setRank(this.remainRank++);
             if (this.remainRank === 4) {
                 this.endGame();
             }

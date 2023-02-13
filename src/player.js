@@ -36,6 +36,10 @@ class Player {
     isPlaying() {
         return this.onPlaying;
     }
+
+    setRank(rank) {
+        this.rank = rank;
+    }
 }
 
 module.exports = Player;
