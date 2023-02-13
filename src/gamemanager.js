@@ -100,6 +100,8 @@ class GameManager {
             currentCard: gameInfo.curCard,
             player: player
         }, io);
+
+        this.broadcastHand(player, SIG.HAND_INFO, io, CODE.OK);
     }
 
     drawCard(player, res, io) {
@@ -133,7 +135,7 @@ class GameManager {
         } else {
             gameInfo.playCard(card, wish);
             res({CODE: CODE.OK});
-            this.broadcastHand(player, SIG.USE_RESULT, io, CODE.OK);
+            this.broadcastHand(player, SIG.HAND_INFO, io, CODE.OK);
             this.checkWin(gameInfo, player, io);
             this.startTurn(player, io);
         }
@@ -148,10 +150,11 @@ class GameManager {
 
     broadcastHand(curPlayer, sig, io, code) {
         const room = this.rooms[curPlayer.getRoom()];
-        room.players.forEach(element => {
-            !!element && io.to(element.id).emit(sig, {
+        room.players.forEach(player => {
+            !!player && io.to(player.id).emit(sig, {
                 CODE: code,
-                yourHand: curPlayer.hand
+                candidateCards: [],
+                yourHand: player.hand
             });
         });
     }

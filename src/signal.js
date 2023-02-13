@@ -9,7 +9,7 @@ const SIG = {
     JOIN_ROOM: "100",
     EXIT_ROOM: "200",
     YOUR_TURN: "300",
-    USE_RESULT: "400",
+    HAND_INFO: "400",
     SOMEONE_WIN: "500",
     END_GAME: "600"
 };
