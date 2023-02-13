@@ -7,9 +7,6 @@ const app = require('express')();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
-const SocketManager = require('../src/socket');
-const socketManager = new SocketManager(io);
-
 const GameManager = require('../src/gamemanager');
 const GM = new GameManager();
 const Player = require('../src/player');
