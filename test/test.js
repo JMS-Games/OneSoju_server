@@ -150,6 +150,16 @@ describe('Unit Test Sequence', () => {
                 assert.equal(result.CODE, CODE.OK);
             }, io);
         });
+
+        it('player1 enter(Create room)', () => {
+            GM.addPlayer(p1, (result) => {
+                assert.equal(result.CODE, CODE.OK);
+            }, io);
+        });
+
+        it('now Room number is 3', () => {
+            assert.equal(Object.keys(GM.rooms).length, 3);
+        });
     });
 
     describe('Show Deque test', () => {
