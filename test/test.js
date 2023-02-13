@@ -10,6 +10,7 @@ const io = require('socket.io')(server);
 const GameManager = require('../src/gamemanager');
 const GM = new GameManager();
 const Player = require('../src/player');
+const Deque = require('../src/deque');
 
 
 describe('Unit Test Sequence', () => {
@@ -148,6 +149,13 @@ describe('Unit Test Sequence', () => {
             GM.startGame(p6, SIG.START_GAME, (result) => {
                 assert.equal(result.CODE, CODE.OK);
             }, io);
+        });
+    });
+
+    describe('Show Deque test', () => {
+        it('new Deque info', () => {
+            const deque = new Deque();
+            console.log(deque);
         });
     });
 });
