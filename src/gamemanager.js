@@ -134,7 +134,10 @@ class GameManager {
             res({CODE: CODE.ERROR});
         } else {
             gameInfo.playCard(card, wish);
-            res({CODE: CODE.OK});
+            res({
+                CODE: CODE.OK,
+                yourHand : player.hand
+            });
             this.broadcastHand(player, SIG.HAND_INFO, io, CODE.OK);
             this.checkWin(gameInfo, player, io);
             this.startTurn(player, io);
@@ -154,7 +157,8 @@ class GameManager {
             !!player && io.to(player.id).emit(sig, {
                 CODE: code,
                 candidateCards: checker.getCandidateCards(player, room),
-                yourHand: player.hand
+                yourHand: player.hand,
+                player : curPlayer
             });
         });
     }
