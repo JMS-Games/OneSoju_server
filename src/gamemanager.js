@@ -128,7 +128,15 @@ class GameManager {
     playCard(player, card, wish, res, io) {
         const room = this.rooms[player.getRoom()];
         const gameInfo = room.getGameInfo();
-        const isIllegal = checker.isIllegal(gameInfo.curCard, card, player.hand);
+        
+        const isValidTurn = checker.isVaildTurn(room, player);
+        
+        if(!isValidTurn){
+            res({CODE: CODE.ERROR});
+            return;
+        }
+        
+        const isIllegal = checker.isIllegal(gameInfo.curCard, card, player.hand, room);
 
         if (isIllegal) {
             res({CODE: CODE.ERROR});
