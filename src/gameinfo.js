@@ -58,6 +58,8 @@ class GameInfo {
         switch (card.type) {
             case CONFIG.CARD_TYPE.NORMAL: break;
             case CONFIG.CARD_TYPE.ATK:
+                if (this.curAtk === 1)
+                    this.curAtk = 0;
                 this.curAtk += card.atk; break;
             case CONFIG.CARD_TYPE.DEF:
                 this.curAtk = 1; break;
