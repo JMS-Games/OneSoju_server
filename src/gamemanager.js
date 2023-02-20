@@ -129,7 +129,7 @@ class GameManager {
         const room = this.rooms[player.getRoom()];
         const gameInfo = room.getGameInfo();
         
-        const isValidTurn = checker.isVaildTurn(room, player);
+        const isValidTurn = checker.isValidTurn(player);
         
         if(!isValidTurn){
             res({CODE: CODE.ERROR});

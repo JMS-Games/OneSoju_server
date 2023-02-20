@@ -5,18 +5,11 @@ class Checker {
 
     }
 
-    isVaildTurn(room, player){
-        //check isTurn of player object
-        
-        // const gameInfo = room.getGameInfo();
-        
-        if(!player.isTurn){
-            return false;
-        }
-        
-        return true;
+    isValidTurn(player){
+        return player.isTurn;
     }
-    isIllegal(curCard, nextCard, hand, room) {
+
+    isIllegal(curCard, nextCard, hand) {
         // nextCard isn't in your hand
         if (!hand.find((element) => element.id === nextCard.id)) {
             console.log('[Checker][ERROR] request error! hand: 404');
