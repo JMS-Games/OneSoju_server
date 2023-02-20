@@ -37,14 +37,17 @@ class SocketManager {
 
             socket.on(SIG.START_GAME, (req, res) => {
                 GM.startGame(curPlayer, SIG.START_GAME, res, this.io);
+                console.log("[GAME START] game starting");
             });
 
             socket.on(SIG.DRAW_CARD, (req, res) => {
                 GM.drawCard(curPlayer, res, this.io);
+                console.log(`[DRAW CARD] from player: ${curPlayer.uuid}`);
             });
 
             socket.on(SIG.USE_CARD, (req, res) => {
                 GM.playCard(curPlayer, req.nextCard, req.wish, res, this.io);
+                console.log(`[USE CARD] from player:`, curPlayer, "nextCard: ", req.nextCard);
             });
 
         });
