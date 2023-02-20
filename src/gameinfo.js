@@ -60,7 +60,7 @@ class GameInfo {
             case CONFIG.CARD_TYPE.ATK:
                 this.curAtk += card.atk; break;
             case CONFIG.CARD_TYPE.DEF:
-                this.curAtk = 0; break;
+                this.curAtk = 1; break;
             case CONFIG.CARD_TYPE.ANY:
                 this.curCard.shape = CONFIG.SHAPE[wish.toString()];
                 break;
