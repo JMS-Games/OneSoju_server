@@ -136,7 +136,7 @@ class GameManager {
             return;
         }
         
-        const isIllegal = checker.isIllegal(gameInfo.curCard, card, player.hand, room);
+        const isIllegal = checker.isIllegal(gameInfo.curCard, card, player.hand, gameInfo.curAtk > 1);
 
         if (isIllegal) {
             res({CODE: CODE.ERROR});

@@ -52,7 +52,7 @@ class Checker {
         if (!gameInfo)
             return;
         const curCard = gameInfo.curCard;
-        return player.hand.filter((card) => !this.isIllegal(curCard, card, player.hand));
+        return player.hand.filter((card) => !this.isIllegal(curCard, card, player.hand, gameInfo.curAtk > 1));
     }
 }
 
