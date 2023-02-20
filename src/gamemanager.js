@@ -98,7 +98,7 @@ class GameManager {
         this.broadcastRoom(player, SIG.YOUR_TURN, {
             CODE: CODE.OK,
             currentCard: gameInfo.curCard,
-            player: player
+            player: gameInfo.curPlayer
         }, io);
 
         this.broadcastHand(player, SIG.HAND_INFO, io, CODE.OK);
