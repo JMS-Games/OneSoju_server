@@ -13,6 +13,7 @@ class GameInfo {
 
         this.remainRank = 1;
         this.curTurn = 0;
+        this.prePlayer = null;
         this.curPlayer = null;
         this.direction = CONFIG.DIRECTION.CLOCKWISE;
         this.curCard = null;
@@ -49,6 +50,7 @@ class GameInfo {
             else
                 player.setTurn(false);
         });
+        this.prePlayer = this.curPlayer;
         this.curPlayer = this.players[this.curTurn];
     }
 
@@ -124,6 +126,19 @@ class GameInfo {
         }
 
         this.endTurn();
+    }
+
+    removePlayer(player) {
+        this.headCount -= 1;
+        this.sideDeque.add(player.hand);
+        player.setPlaying(false);
+
+        if (this.headCount < 2)
+            this.endGame();
+
+        if (player === this.curPlayer)
+            this.endTurn();
+
     }
 
     endGame() {

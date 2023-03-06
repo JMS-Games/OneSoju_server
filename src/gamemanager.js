@@ -68,8 +68,7 @@ class GameManager {
         if (!gameInfo)
             return;
 
-        gameInfo.sideDeque.add(player.hand);
-        player.setPlaying(false);
+        gameInfo.removePlayer(player);
     }
 
     startGame(player, sig, res, io) {
@@ -98,7 +97,8 @@ class GameManager {
         this.broadcastRoom(player, SIG.YOUR_TURN, {
             CODE: CODE.OK,
             currentCard: gameInfo.curCard,
-            player: gameInfo.curPlayer
+            player: gameInfo.curPlayer,
+            prePlayer: gameInfo.prePlayer
         }, io);
 
         this.broadcastHand(player, SIG.HAND_INFO, io, CODE.OK);
