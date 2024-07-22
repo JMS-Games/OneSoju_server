@@ -17,7 +17,7 @@ class Deque {
     }
 
     makeEmpty() {
-        this.queue = [];
+        this.queue.length = 0;
         this.size = 0;
     }
 
